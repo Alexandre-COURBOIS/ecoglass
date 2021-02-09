@@ -11,6 +11,8 @@
   src: local('Ryman'), url("./assets/font/RymanEco-Regular.otf") format("truetype");
 }
 
-body{
-  background: black;
+body {
+  background: url("assets/image/Background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }

@@ -1,7 +1,12 @@
+header {
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  position: fixed;
+  z-index: 2;
+}
 
 img {
   width: 10%;
-  height: 10%;
+  height: 8%;
 }
 
 .navbar-brand {
@@ -14,7 +19,7 @@ img {
 }
 
 a {
-  color: black !important;
+  color: white !important;
   font-size: 18px !important;
 }
 
@@ -28,7 +33,7 @@ li a:hover {
 .loginButton {
   margin-right: 5% !important;
   color: whitesmoke !important;
-  background: black;
+  background: #28a745;
   padding: 10% 10% 10% 10%;
   border-radius: 55px;
   text-decoration: none;
