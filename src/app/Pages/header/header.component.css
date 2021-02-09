@@ -1,0 +1,41 @@
+
+img {
+  width: 10%;
+  height: 10%;
+}
+
+.navbar-brand {
+  width: 60%;
+  height: 100%;
+}
+
+#navbarText {
+  text-align: center;
+}
+
+a {
+  color: black !important;
+  font-size: 18px !important;
+}
+
+li a:hover {
+  color: #373737 !important;
+}
+
+.navbar-text {
+  margin-right: 5%;
+}
+.loginButton {
+  margin-right: 5% !important;
+  color: whitesmoke !important;
+  background: black;
+  padding: 10% 10% 10% 10%;
+  border-radius: 55px;
+  text-decoration: none;
+}
+
+.loginButton:hover {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  transition: .3s ease-in;
+}
