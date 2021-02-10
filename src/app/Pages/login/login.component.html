@@ -1,1 +1,52 @@
-<p>login works!</p>
+<div class="backGround">
+  <div style="position: relative; top: 500px">
+    <ngx-ui-loader [hasProgressBar]="false" [loaderId]="'loader-01'"></ngx-ui-loader>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="card">
+          <img class="card-img-top" src="assets/image/undraw_Login_re_4vu2.svg" alt="Card image cap">
+          <div class="card-body text-center">
+            <h5 class="card-title title1">Plus que quelques cliques pour effectuer</h5>
+            <h3 class="card-title title2">un beau geste pour la Planête !</h3>
+          </div>
+          <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <input placeholder="Email" type="text" name="email" id="email" class="form-control"
+                     formControlName="email">
+            </div>
+            <div class="container-error">
+              <div class="error" *ngIf="submitted && f.email.errors && f.email.errors.required">Merci de renseigner
+                votre
+                email.
+              </div>
+              <div class="error" *ngIf="authForm.get('email')?.value && f.email.errors && f.email.errors.pattern">Merci
+                de renseigner un email valide.
+              </div>
+            </div>
+            <div class="form-group">
+              <input placeholder="Mot de passe" type="password" name="password" id="password" class="form-control"
+                     formControlName="password">
+            </div>
+            <div class="container-error">
+              <div class="error" *ngIf="submitted && f.password.errors && f.password.errors.required">Merci de
+                renseigner
+                votre mot de passe.
+              </div>
+              <div class="error"
+                   *ngIf="authForm.get('password')?.value && f.password.errors && f.password.errors.pattern">
+                Doit contenir au moins, 8 caractères, une lettre majuscule, un chiffre et un caractère spécial.
+              </div>
+            </div>
+            <div class="text-center">
+              <input type="submit" class="btn btn-success" value="Contribuer !">
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+</div>

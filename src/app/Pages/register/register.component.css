@@ -46,16 +46,6 @@ input {
   width: 100%;
 }
 
-.container-error {
-  height: 15px;
-}
-
-.error {
-  color: red;
-  font-size: 12px;
-  font-weight: bold;
-}
-
 @media (max-width: 1199px) {
   .ccol-md-6ol {
     height: 650px;
