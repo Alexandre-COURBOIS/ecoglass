@@ -1,5 +1,4 @@
 header {
-  border-bottom: 1px solid rgba(0,0,0,.2);
   position: fixed;
   z-index: 2;
 }
@@ -10,7 +9,7 @@ img {
 }
 
 .navbar-brand {
-  width: 60%;
+  width: 42%;
   height: 100%;
 }
 
@@ -19,8 +18,9 @@ img {
 }
 
 a {
-  color: white !important;
-  font-size: 18px !important;
+  color: #6C757D !important;
+  font-size: 12px !important;
+  font-weight: bold;
 }
 
 li a:hover {
@@ -30,17 +30,12 @@ li a:hover {
 .navbar-text {
   margin-right: 5%;
 }
-.loginButton {
-  margin-right: 5% !important;
-  color: whitesmoke !important;
-  background: #28a745;
-  padding: 10% 10% 10% 10%;
-  border-radius: 55px;
-  text-decoration: none;
+
+i {
+  color: #28A745;
+  font-size: 25px;
 }
 
-.loginButton:hover {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  transition: .3s ease-in;
+ul li{
+  padding: 0 5% 0 5%;
 }

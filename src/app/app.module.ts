@@ -16,6 +16,11 @@ import {UserProfilComponent} from './Pages/user-profil/user-profil.component';
 import {NotFound404Component} from './Pages/not-found404/not-found404.component';
 import {HeaderComponent} from './Pages/header/header.component';
 import {FooterComponent} from './Pages/footer/footer.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http';
+import {NgxUiLoaderModule} from 'ngx-ui-loader';
 
 
 @NgModule({
@@ -37,10 +42,15 @@ import {FooterComponent} from './Pages/footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    HttpClientModule,
+    NgxUiLoaderModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

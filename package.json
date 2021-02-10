@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~11.0.0",
+    "@angular/animations": "^11.0.9",
     "@angular/common": "~11.0.0",
     "@angular/compiler": "~11.0.0",
     "@angular/core": "~11.0.0",
@@ -21,6 +21,8 @@
     "@angular/router": "~11.0.0",
     "bootstrap": "^4.6.0",
     "jquery": "^3.5.1",
+    "ngx-toastr": "^13.2.0",
+    "ngx-ui-loader": "^10.0.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
