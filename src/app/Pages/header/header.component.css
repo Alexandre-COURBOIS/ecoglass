@@ -1,0 +1,41 @@
+header {
+  position: fixed;
+  z-index: 2;
+}
+
+img {
+  width: 10%;
+  height: 8%;
+}
+
+.navbar-brand {
+  width: 42%;
+  height: 100%;
+}
+
+#navbarText {
+  text-align: center;
+}
+
+a {
+  color: #6C757D !important;
+  font-size: 12px !important;
+  font-weight: bold;
+}
+
+li a:hover {
+  color: #373737 !important;
+}
+
+.navbar-text {
+  margin-right: 5%;
+}
+
+i {
+  color: #28A745;
+  font-size: 25px;
+}
+
+ul li{
+  padding: 0 5% 0 5%;
+}

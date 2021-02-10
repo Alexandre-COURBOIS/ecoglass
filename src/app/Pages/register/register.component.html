@@ -1,1 +1,119 @@
-<p>register works!</p>
+<div class="backGround">
+  <div style="position: relative; top: 500px">
+    <ngx-ui-loader [hasProgressBar]="false" [loaderId]="'loader-01'"></ngx-ui-loader>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col1">
+      </div>
+      <div class="col-md-6 col2">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input placeholder="Prenom" type="text" name="surname" id="surname" class="form-control"
+                   formControlName="surname">
+          </div>
+          <div class="container-error">
+            <div class="error" *ngIf="submitted && f.surname.errors && f.surname.errors.required">Merci de renseigner
+              votre prénom.
+            </div>
+            <div class="error" *ngIf="submitted && f.surname.errors && f.surname.errors.minlength">Merci de renseigner
+              un prénom valide.
+            </div>
+          </div>
+          <div class="form-group">
+            <input placeholder="Nom" type="text" name="name" id="name" class="form-control" formControlName="name">
+          </div>
+          <div class="container-error">
+            <div class="error" *ngIf="submitted && f.name.errors && f.name.errors.required">Merci de renseigner votre
+              nom.
+            </div>
+            <div class="error" *ngIf="submitted && f.name.errors && f.name.errors.minlength">Merci de renseigner
+              un nom valide.
+            </div>
+          </div>
+          <div class="form-group">
+            <input placeholder="Pseudo" type="text" name="pseudo" id="pseudo" class="form-control"
+                   formControlName="pseudo">
+          </div>
+          <div class="container-error">
+            <div class="error" *ngIf="submitted && f.pseudo.errors && f.pseudo.errors.required">Merci de renseigner
+              votre pseudo.
+            </div>
+            <div class="error" *ngIf="submitted && f.pseudo.errors && f.pseudo.errors.minlength">Merci de renseigner
+              un pseudo valide.
+            </div>
+          </div>
+          <div class="form-group">
+            <input placeholder="Email" type="text" name="email" id="email" class="form-control" formControlName="email">
+          </div>
+          <div class="container-error">
+            <div class="error" *ngIf="submitted && f.email.errors && f.email.errors.required">Merci de renseigner votre
+              email.
+            </div>
+            <div class="error" *ngIf="registerForm.get('email')?.value && f.email.errors && f.email.errors.pattern">Merci
+              de renseigner un email valide.
+            </div>
+          </div>
+          <div class="form-group">
+            <input placeholder="Adresse" type="text" name="address" id="address" class="form-control"
+                   formControlName="address">
+          </div>
+          <div class="container-error">
+            <div class="error" *ngIf="submitted && f.address.errors && f.address.errors.required">Merci de renseigner
+              votre
+              adresse.
+            </div>
+            <div class="error" *ngIf="submitted && f.address.errors && f.address.errors.minlength">Merci de renseigner
+              une adresse valide.
+            </div>
+          </div>
+          <div class="form-group">
+            <input placeholder="Ville" type="text" name="city" id="city" class="form-control" formControlName="city">
+          </div>
+          <div class="container-error">
+            <div class="error" *ngIf="submitted && f.city.errors && f.city.errors.required">Merci de renseigner votre
+              code
+              ville.
+            </div>
+            <div class="error" *ngIf="submitted && f.city.errors && f.city.errors.minlength">Merci de renseigner
+              une ville existante.
+            </div>
+          </div>
+          <div class="form-group">
+            <input placeholder="Code postal" type="text" name="postalCode" id="postalCode" class="form-control"
+                   formControlName="postalCode">
+          </div>
+          <div class="container-error">
+            <div class="error" *ngIf="submitted && f.postalCode.errors && f.postalCode.errors.required">Merci de
+              renseigner
+              votre code postal.
+            </div>
+          </div>
+          <div class="form-group">
+            <input placeholder="Mot de passe" type="password" name="password" id="password" class="form-control"
+                   formControlName="password">
+          </div>
+          <div class="container-error">
+            <div class="error" *ngIf="submitted && f.password.errors && f.password.errors.required">Merci de renseigner
+              votre mot de passe.
+            </div>
+            <div class="error"
+
+                 *ngIf="registerForm.get('password')?.value && f.password.errors && f.password.errors.pattern">
+              Doit contenir au moins, 8 caractères, une lettre majuscule, un chiffre et un caractère spécial.
+            </div>
+
+          </div>
+          <div class="form-group">
+            <input placeholder="Confirmer votre mot de passe" type="password" name="verifPassword" id="verifPassword"
+                   class="form-control"
+                   formControlName="verifPassword">
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-success btnSubmit">Bienvenue !</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

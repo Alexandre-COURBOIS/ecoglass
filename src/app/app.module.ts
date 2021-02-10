@@ -4,16 +4,24 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './Pages/home/home.component';
-import { LoginComponent } from './Pages/login/login.component';
-import { MapComponent } from './Pages/map/map.component';
-import { RegisterComponent } from './Pages/register/register.component';
-import { UpdateUserComponent } from './Pages/update-user/update-user.component';
-import { UpdateUserPersonnalInformationsComponent } from './Pages/update-user/update-user-personnal-informations/update-user-personnal-informations.component';
-import { UpdateUserContactInformationsComponent } from './Pages/update-user/update-user-contact-informations/update-user-contact-informations.component';
-import { UpdateUserPasswordComponent } from './Pages/update-user/update-user-password/update-user-password.component';
-import { ForgotPasswordComponent } from './Pages/forgot-password/forgot-password.component';
-import { UserProfilComponent } from './Pages/user-profil/user-profil.component';
-import { NotFound404Component } from './Pages/not-found404/not-found404.component';
+import {LoginComponent} from './Pages/login/login.component';
+import {MapComponent} from './Pages/map/map.component';
+import {RegisterComponent} from './Pages/register/register.component';
+import {UpdateUserComponent} from './Pages/update-user/update-user.component';
+import {UpdateUserPersonnalInformationsComponent} from './Pages/update-user/update-user-personnal-informations/update-user-personnal-informations.component';
+import {UpdateUserContactInformationsComponent} from './Pages/update-user/update-user-contact-informations/update-user-contact-informations.component';
+import {UpdateUserPasswordComponent} from './Pages/update-user/update-user-password/update-user-password.component';
+import {ForgotPasswordComponent} from './Pages/forgot-password/forgot-password.component';
+import {UserProfilComponent} from './Pages/user-profil/user-profil.component';
+import {NotFound404Component} from './Pages/not-found404/not-found404.component';
+import {HeaderComponent} from './Pages/header/header.component';
+import {FooterComponent} from './Pages/footer/footer.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http';
+import {NgxUiLoaderModule} from 'ngx-ui-loader';
+
 
 @NgModule({
   declarations: [
@@ -28,14 +36,21 @@ import { NotFound404Component } from './Pages/not-found404/not-found404.componen
     UpdateUserPasswordComponent,
     ForgotPasswordComponent,
     UserProfilComponent,
-    NotFound404Component
+    NotFound404Component,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    HttpClientModule,
+    NgxUiLoaderModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }
