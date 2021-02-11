@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
 
           this.ngxService.stopLoader('loader-01');
 
+
           // stocker le jwt
 
           // faire l'intercepteur
