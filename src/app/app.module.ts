@@ -19,8 +19,9 @@ import {FooterComponent} from './Pages/footer/footer.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgxUiLoaderModule} from 'ngx-ui-loader';
+import {JwtInterceptor} from './Helpers/jwt.interceptor';
 
 
 @NgModule({
@@ -49,7 +50,13 @@ import {NgxUiLoaderModule} from 'ngx-ui-loader';
     HttpClientModule,
     NgxUiLoaderModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

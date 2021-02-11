@@ -5,7 +5,8 @@ import {NgxUiLoaderService} from 'ngx-ui-loader';
 import {Router} from '@angular/router';
 import {AuthService} from '../../Services/auth.service';
 import {CookieService} from 'ngx-cookie-service';
-import {encode} from 'querystring';
+import jwtDecode from 'jwt-decode';
+import {UserService} from '../../Services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   authForm = new FormGroup({email: new FormControl(), password: new FormControl()});
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private toastr: ToastrService,
-              private ngxService: NgxUiLoaderService, private cookieService: CookieService) {
+              private ngxService: NgxUiLoaderService,private userService: UserService, private cookieService: CookieService) {
   }
 
   ngOnInit() {
@@ -52,12 +53,16 @@ export class LoginComponent implements OnInit {
 
           this.cookieService.set(JWTCookieName,JWTToken);
 
-          console.log(this.cookieService.get('_token'));
-
-          // stocker le jwt
+          const decodedJWT = jwtDecode(JWTToken);
+          // @ts-ignore
+          const userEmail = decodedJWT.username;
 
           // faire l'intercepteur
-
+          this.userService.getUserByEmail(userEmail).subscribe(value1 => {
+            console.log(value1);
+          }, error => {
+            console.log(error);
+          })
           // Executer une requête pour récupérer les infos utilisateur
 
           // Stocker en storage où cookie les infos utilisateur
