@@ -4,6 +4,8 @@ import {ToastrService} from 'ngx-toastr';
 import {NgxUiLoaderService} from 'ngx-ui-loader';
 import {Router} from '@angular/router';
 import {AuthService} from '../../Services/auth.service';
+import {CookieService} from 'ngx-cookie-service';
+import {encode} from 'querystring';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
   authForm = new FormGroup({email: new FormControl(), password: new FormControl()});
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private toastr: ToastrService, private ngxService: NgxUiLoaderService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private toastr: ToastrService,
+              private ngxService: NgxUiLoaderService, private cookieService: CookieService) {
   }
 
   ngOnInit() {
@@ -41,11 +44,15 @@ export class LoginComponent implements OnInit {
 
       if (email && password) {
 
-        this.authService.login(email, password).subscribe(value => {
-          console.log(value);
+        this.authService.login(email, password).subscribe((value) => {
 
-          this.ngxService.stopLoader('loader-01');
+          // @ts-ignore
+          const JWTToken = value['token'];
+          const JWTCookieName = "_token";
 
+          this.cookieService.set(JWTCookieName,JWTToken);
+
+          console.log(this.cookieService.get('_token'));
 
           // stocker le jwt
 
@@ -56,6 +63,7 @@ export class LoginComponent implements OnInit {
           // Stocker en storage où cookie les infos utilisateur
 
           // Rediriger vers le profil
+          this.ngxService.stopLoader('loader-01');
 
         }, error => {
           if (error.error.message) {
