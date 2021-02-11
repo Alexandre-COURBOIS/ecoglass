@@ -22,6 +22,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgxUiLoaderModule} from 'ngx-ui-loader';
 import {JwtInterceptor} from './Helpers/jwt.interceptor';
+import {AuthGuardService} from './Services/auth-guard.service';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import {JwtInterceptor} from './Helpers/jwt.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
-    }
+    },
+    AuthGuardService,
   ],
   bootstrap: [AppComponent],
 })
