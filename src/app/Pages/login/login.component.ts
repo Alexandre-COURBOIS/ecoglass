@@ -4,9 +4,9 @@ import {ToastrService} from 'ngx-toastr';
 import {NgxUiLoaderService} from 'ngx-ui-loader';
 import {Router} from '@angular/router';
 import {AuthService} from '../../Services/auth.service';
-import {CookieService} from 'ngx-cookie-service';
 import jwtDecode from 'jwt-decode';
 import {UserService} from '../../Services/user.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   authForm = new FormGroup({email: new FormControl(), password: new FormControl()});
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private toastr: ToastrService,
-              private ngxService: NgxUiLoaderService,private userService: UserService, private cookieService: CookieService) {
+              private ngxService: NgxUiLoaderService, private userService: UserService, private cookieService: CookieService) {
   }
 
   ngOnInit() {
@@ -49,20 +49,45 @@ export class LoginComponent implements OnInit {
 
           // @ts-ignore
           const JWTToken = value['token'];
-          const JWTCookieName = "_token";
+          const JWTCookieName = '_token';
 
-          this.cookieService.set(JWTCookieName,JWTToken);
+          this.cookieService.set(JWTCookieName, JWTToken);
 
           const decodedJWT = jwtDecode(JWTToken);
           // @ts-ignore
           const userEmail = decodedJWT.username;
 
           // faire l'intercepteur
-          this.userService.getUserByEmail(userEmail).subscribe(value1 => {
-            console.log(value1);
+          // @ts-ignore
+          this.userService.getUserByEmail(userEmail).subscribe(user => {
+
+            // @ts-ignore
+            this.cookieService.set('_logged', true);
+            // @ts-ignore
+            this.cookieService.set('_id', user.id);
+            // @ts-ignore
+            this.cookieService.set('_name', user.name);
+            // @ts-ignore
+            this.cookieService.set('_surname', user.surname);
+            // @ts-ignore
+            this.cookieService.set('_pseudo', user.pseudo);
+            // @ts-ignore
+            this.cookieService.set('_email', user.email);
+            // @ts-ignore
+            this.cookieService.set('_city', user.city);
+            // @ts-ignore
+            this.cookieService.set('_address', user.address);
+            // @ts-ignore
+            this.cookieService.set('_postalCode', user.postalCode);
+
+            this.router.navigate(['/user-profil']).then(logged => {
+              // @ts-ignore
+              this.toastr.success('Bienvenue ' + user.surname);
+
+            });
           }, error => {
             console.log(error);
-          })
+          });
           // Executer une requête pour récupérer les infos utilisateur
 
           // Stocker en storage où cookie les infos utilisateur
