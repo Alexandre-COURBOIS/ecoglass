@@ -11,12 +11,14 @@ import {UpdateUserPersonnalInformationsComponent} from './Pages/update-user/upda
 import {UpdateUserPasswordComponent} from './Pages/update-user/update-user-password/update-user-password.component';
 import {NotFound404Component} from './Pages/not-found404/not-found404.component';
 import {AuthGuardService} from './Services/auth-guard.service';
+import {ContactComponent} from './Pages/contact/contact.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'contact', component: ContactComponent},
   {path: 'user-profil', canActivate: [AuthGuardService], component: UserProfilComponent},
   {path: 'map', canActivate: [AuthGuardService], component: MapComponent},
   {path: 'update-user', canActivate: [AuthGuardService], component: UpdateUserComponent},
