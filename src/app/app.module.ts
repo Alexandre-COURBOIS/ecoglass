@@ -24,6 +24,7 @@ import {NgxUiLoaderModule} from 'ngx-ui-loader';
 import {JwtInterceptor} from './Helpers/jwt.interceptor';
 import {AuthGuardService} from './Services/auth-guard.service';
 import { ContactComponent } from './Pages/contact/contact.component';
+import {LoggedGuardService} from './Services/logged-guard.service';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { ContactComponent } from './Pages/contact/contact.component';
       multi: true
     },
     AuthGuardService,
+    LoggedGuardService,
   ],
   bootstrap: [AppComponent],
 })
