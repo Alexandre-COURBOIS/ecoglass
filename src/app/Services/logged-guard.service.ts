@@ -6,7 +6,7 @@ import jwtDecode from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate {
+export class LoggedGuardService implements CanActivate {
 
   constructor(private router: Router, private cookieService: CookieService) {
   }
@@ -22,10 +22,10 @@ export class AuthGuardService implements CanActivate {
 
         // @ts-ignore
         if (loggedStatus === 'true' && jwtDecode(jwtToken).username === username) {
-          resolve(true);
-        } else {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/user-profil']);
           resolve(false);
+        } else {
+          resolve(true);
         }
       }
     );
