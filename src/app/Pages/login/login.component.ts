@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
           // @ts-ignore
           const userEmail = decodedJWT.username;
 
-          // faire l'intercepteur
           // @ts-ignore
           this.userService.getUserByEmail(userEmail).subscribe(user => {
 
@@ -88,11 +87,7 @@ export class LoginComponent implements OnInit {
           }, error => {
             console.log(error);
           });
-          // Executer une requête pour récupérer les infos utilisateur
 
-          // Stocker en storage où cookie les infos utilisateur
-
-          // Rediriger vers le profil
           this.ngxService.stopLoader('loader-01');
 
         }, error => {
