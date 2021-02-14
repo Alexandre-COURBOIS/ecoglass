@@ -25,6 +25,8 @@ import {JwtInterceptor} from './Helpers/jwt.interceptor';
 import {AuthGuardService} from './Services/auth-guard.service';
 import { ContactComponent } from './Pages/contact/contact.component';
 import {LoggedGuardService} from './Services/logged-guard.service';
+import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import {LoggedGuardService} from './Services/logged-guard.service';
     NotFound404Component,
     HeaderComponent,
     FooterComponent,
-    ContactComponent
+    ContactComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import {LoggedGuardService} from './Services/logged-guard.service';
     },
     AuthGuardService,
     LoggedGuardService,
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })

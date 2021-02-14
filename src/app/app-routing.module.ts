@@ -13,12 +13,14 @@ import {NotFound404Component} from './Pages/not-found404/not-found404.component'
 import {AuthGuardService} from './Services/auth-guard.service';
 import {ContactComponent} from './Pages/contact/contact.component';
 import {LoggedGuardService} from './Services/logged-guard.service';
+import {ResetPasswordComponent} from './Pages/reset-password/reset-password.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'register',/* canActivate: [LoggedGuardService],*/ component: RegisterComponent},
   {path: 'login',/* canActivate: [LoggedGuardService],*/ component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'reset-password/:token', component: ResetPasswordComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'user-profil', /*canActivate: [AuthGuardService],*/ component: UserProfilComponent},
   {path: 'map', /*canActivate: [AuthGuardService],*/ component: MapComponent},
