@@ -7,6 +7,8 @@ import {AuthService} from '../../Services/auth.service';
 import jwtDecode from 'jwt-decode';
 import {UserService} from '../../Services/user.service';
 import {CookieService} from 'ngx-cookie-service';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ResetPasswordService} from '../../Services/reset-password.service';
 
 @Component({
   selector: 'app-login',
@@ -15,21 +17,32 @@ import {CookieService} from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit {
 
+  closeResult = '';
   submitted = false;
+  submittedReset = false;
   authForm = new FormGroup({email: new FormControl(), password: new FormControl()});
+  resetPasswordForm = new FormGroup({email: new FormControl()});
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private toastr: ToastrService,
-              private ngxService: NgxUiLoaderService, private userService: UserService, private cookieService: CookieService) {
+              private ngxService: NgxUiLoaderService, private userService: UserService, private cookieService: CookieService, private modalService: NgbModal,
+              private resetPasswordService: ResetPasswordService) {
   }
 
   ngOnInit() {
     this.initForm();
+    this.initPasswordResetForm();
   }
 
   initForm() {
     this.authForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]]
+    });
+  }
+
+  initPasswordResetForm() {
+    this.resetPasswordForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]]
     });
   }
 
@@ -57,7 +70,6 @@ export class LoginComponent implements OnInit {
           // @ts-ignore
           const userEmail = decodedJWT.username;
 
-          // faire l'intercepteur
           // @ts-ignore
           this.userService.getUserByEmail(userEmail).subscribe(user => {
 
@@ -88,11 +100,7 @@ export class LoginComponent implements OnInit {
           }, error => {
             console.log(error);
           });
-          // Executer une requête pour récupérer les infos utilisateur
 
-          // Stocker en storage où cookie les infos utilisateur
-
-          // Rediriger vers le profil
           this.ngxService.stopLoader('loader-01');
 
         }, error => {
@@ -111,8 +119,51 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  submitResetPassWordForm() {
+
+    this.submittedReset = true;
+    if (this.resetPasswordForm.valid) {
+
+      const email = this.resetPasswordForm.get('email')?.value;
+
+      if (email) {
+        this.resetPasswordService.sendMailForForgotPassword(email).subscribe(value => {
+          // @ts-ignore
+          this.toastr.success(value, 'Allez voir vos mails !');
+        }, error => {
+          this.toastr.error(error.error, 'Apparemment il y a un problème !');
+        });
+      }
+    }
+  }
+
+// Modal
+
+  // @ts-ignore
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered: true}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
   get f() {
     return this.authForm.controls;
+  }
+
+  get fp() {
+    return this.resetPasswordForm.controls;
   }
 
 }
