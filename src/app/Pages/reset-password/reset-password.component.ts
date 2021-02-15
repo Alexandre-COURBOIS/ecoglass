@@ -18,19 +18,18 @@ export class ResetPasswordComponent implements OnInit {
 
     if (token && token.length === 86) {
       const date = new Date();
-      const formatDate = this.datePipe.transform(date, "Y-MM-d HH:mm:ss");
+      const formatDate = this.datePipe.transform(date, 'Y-MM-d HH:mm:ss');
 
-      console.log(formatDate);
-
-     this.resetPasswordService.getTokenInformations(token, formatDate).subscribe(value => {
-       console.log(value);
-       if (value === 200 ) {
-         console.log("ok");
-       }
-     }, error => {
-
-       console.log("nop")
-     })
+      this.resetPasswordService.getTokenInformations(token, formatDate).subscribe(value => {
+        console.log(value);
+        if (value === 200) {
+          console.log('ok');
+        } else {
+          this.router.navigate(['/404NotFound']);
+        }
+      }, error => {
+        this.router.navigate(['/404NotFound']);
+      });
     } else {
       this.router.navigate(['/404NotFound']);
     }
