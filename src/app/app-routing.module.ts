@@ -4,7 +4,6 @@ import {HomeComponent} from './Pages/home/home.component';
 import {RegisterComponent} from './Pages/register/register.component';
 import {LoginComponent} from './Pages/login/login.component';
 import {MapComponent} from './Pages/map/map.component';
-import {ForgotPasswordComponent} from './Pages/forgot-password/forgot-password.component';
 import {UserProfilComponent} from './Pages/user-profil/user-profil.component';
 import {UpdateUserComponent} from './Pages/update-user/update-user.component';
 import {UpdateUserPersonnalInformationsComponent} from './Pages/update-user/update-user-personnal-informations/update-user-personnal-informations.component';
@@ -19,7 +18,6 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'register',/* canActivate: [LoggedGuardService],*/ component: RegisterComponent},
   {path: 'login',/* canActivate: [LoggedGuardService],*/ component: LoginComponent},
-  {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'reset-password/:token', component: ResetPasswordComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'user-profil', /*canActivate: [AuthGuardService],*/ component: UserProfilComponent},

@@ -41,11 +41,11 @@
               </div>
             </div>
             <div class="text-center">
-              <input type="submit" class="btn btn-success" value="Contribuer !">
+              <input type="submit" [disabled]="submitted" class="btn btn-success" value="Contribuer !">
             </div>
           </form>
           <div class="text-center forgotPassword">
-            <a routerLink="/forgot-password">Mot de passe oublié ?</a>
+            <a (click)="open(content)">Mot de passe oublié ?</a>
           </div>
         </div>
       </div>
@@ -53,3 +53,37 @@
     </div>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div style="background: green; color: white" class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Mot de passe oublié ?</h4>
+    <button style="color: white" type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div style="background: #FAFAFA;" class="modal-body">
+    <form [formGroup]="resetPasswordForm" (ngSubmit)="submitResetPassWordForm()">
+      <div class="form-group">
+        <div class="input-group">
+          <input placeholder="Votre email"
+                 style="width: 100%; border: none; border-bottom: 1px solid rgba(0,0,0,0.3); background: #FAFAFA"
+                 type="text" formControlName="email">
+        </div>
+      </div>
+      <div class="container-error">
+        <div class="error" *ngIf="submitted && fp.email.errors && fp.email.errors.required">Merci de renseigner
+          votre
+          email.
+        </div>
+        <div class="error" *ngIf="resetPasswordForm.get('email')?.value && fp.email.errors && fp.email.errors.pattern">
+          Merci
+          de renseigner un email valide.
+        </div>
+      </div>
+      <div class="text-right">
+        <input type="submit" class="btn btn-success" [disabled]="resetPasswordForm.invalid" (click)="modal.close()" value="Envoyer !">
+      </div>
+    </form>
+  </div>
+
+</ng-template>

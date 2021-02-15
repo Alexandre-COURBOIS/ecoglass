@@ -29,3 +29,13 @@ input {
 .forgotPassword{
   padding-bottom: 2%;
 }
+
+.forgotPassword a {
+  cursor: pointer;
+  color: black;
+}
+
+
+.forgotPassword a:hover {
+  color: grey;
+}

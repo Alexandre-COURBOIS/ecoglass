@@ -11,7 +11,6 @@ import {UpdateUserComponent} from './Pages/update-user/update-user.component';
 import {UpdateUserPersonnalInformationsComponent} from './Pages/update-user/update-user-personnal-informations/update-user-personnal-informations.component';
 import {UpdateUserContactInformationsComponent} from './Pages/update-user/update-user-contact-informations/update-user-contact-informations.component';
 import {UpdateUserPasswordComponent} from './Pages/update-user/update-user-password/update-user-password.component';
-import {ForgotPasswordComponent} from './Pages/forgot-password/forgot-password.component';
 import {UserProfilComponent} from './Pages/user-profil/user-profil.component';
 import {NotFound404Component} from './Pages/not-found404/not-found404.component';
 import {HeaderComponent} from './Pages/header/header.component';
@@ -27,6 +26,7 @@ import { ContactComponent } from './Pages/contact/contact.component';
 import {LoggedGuardService} from './Services/logged-guard.service';
 import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
 import {DatePipe} from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -40,7 +40,6 @@ import {DatePipe} from '@angular/common';
     UpdateUserPersonnalInformationsComponent,
     UpdateUserContactInformationsComponent,
     UpdateUserPasswordComponent,
-    ForgotPasswordComponent,
     UserProfilComponent,
     NotFound404Component,
     HeaderComponent,
@@ -56,6 +55,7 @@ import {DatePipe} from '@angular/common';
     BrowserAnimationsModule,
     HttpClientModule,
     NgxUiLoaderModule,
+    NgbModule,
   ],
   providers: [
     {
