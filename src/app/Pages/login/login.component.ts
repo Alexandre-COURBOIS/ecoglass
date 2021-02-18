@@ -9,6 +9,7 @@ import {UserService} from '../../Services/user.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ResetPasswordService} from '../../Services/reset-password.service';
+import {EncryptServiceService} from '../../Services/encrypt-service.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private toastr: ToastrService,
               private ngxService: NgxUiLoaderService, private userService: UserService, private cookieService: CookieService, private modalService: NgbModal,
-              private resetPasswordService: ResetPasswordService) {
+              private resetPasswordService: ResetPasswordService, private encryptService: EncryptServiceService) {
   }
 
   ngOnInit() {
@@ -77,7 +78,9 @@ export class LoginComponent implements OnInit {
           this.userService.getUserByEmail(userEmail).subscribe(user => {
 
             // @ts-ignore
-            this.cookieService.set('_logged', true);
+            var encodedStatus = this.encryptService.encode("true");
+            // @ts-ignore
+            this.cookieService.set('_logged', encodedStatus);
             // @ts-ignore
             this.cookieService.set('_id', user.id);
             // @ts-ignore
@@ -87,7 +90,9 @@ export class LoginComponent implements OnInit {
             // @ts-ignore
             this.cookieService.set('_pseudo', user.pseudo);
             // @ts-ignore
-            this.cookieService.set('_email', user.email);
+            var encodedMail = this.encryptService.encode(user.email);
+            // @ts-ignore
+            this.cookieService.set('_email', encodedMail);
             // @ts-ignore
             this.cookieService.set('_city', user.city);
             // @ts-ignore
