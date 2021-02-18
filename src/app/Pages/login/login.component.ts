@@ -100,13 +100,16 @@ export class LoginComponent implements OnInit {
             // @ts-ignore
             this.cookieService.set('_postalCode', user.postalCode);
 
-                        this.router.navigate(['/user-profil']).then(logged => {
-                          // @ts-ignore
-                          sessionStorage.setItem('firstLog', '0');
+            this.router.navigate(['/user-profil']).then(logged => {
+              // @ts-ignore
 
-                          window.location.reload();
+              let logValue = this.encryptService.encode("true");
 
-                        });
+              sessionStorage.setItem('firstLog', logValue);
+
+              window.location.reload();
+
+            });
           }, error => {
             console.log(error);
             this.submitted = false;
