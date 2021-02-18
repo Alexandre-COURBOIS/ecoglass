@@ -15,13 +15,16 @@ import {ResetPasswordService} from '../../Services/reset-password.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
+  username !: string;
   closeResult = '';
   submitted = false;
   submittedReset = false;
   authForm = new FormGroup({email: new FormControl(), password: new FormControl()});
   resetPasswordForm = new FormGroup({email: new FormControl()});
+
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private toastr: ToastrService,
               private ngxService: NgxUiLoaderService, private userService: UserService, private cookieService: CookieService, private modalService: NgbModal,
@@ -92,30 +95,37 @@ export class LoginComponent implements OnInit {
             // @ts-ignore
             this.cookieService.set('_postalCode', user.postalCode);
 
-            this.router.navigate(['/user-profil']).then(logged => {
-              // @ts-ignore
-              this.toastr.success('Bienvenue ' + user.surname);
+                        this.router.navigate(['/user-profil']).then(logged => {
+                          // @ts-ignore
+                          sessionStorage.setItem('firstLog', '0');
 
-            });
+                          window.location.reload();
+
+                        });
           }, error => {
             console.log(error);
+            this.submitted = false;
           });
 
           this.ngxService.stopLoader('loader-01');
 
         }, error => {
           if (error.error.message) {
+            this.submitted = false;
             this.toastr.error('Email ou mot de passe incorrect');
+            this.submitted = false;
           }
           this.ngxService.stopLoader('loader-01');
         });
       } else {
         this.toastr.error('Tiens ? Les informations renseignées ne sont pas correct !', 'Oups une erreur ?');
         this.ngxService.stopLoader('loader-01');
+        this.submitted = false;
       }
     } else {
       this.toastr.error('Il semblerait que le formulaire n\'est pas renseigné correctement !', 'Oups une erreur ?');
       this.ngxService.stopLoader('loader-01');
+      this.submitted = false;
     }
   }
 
@@ -165,5 +175,7 @@ export class LoginComponent implements OnInit {
   get fp() {
     return this.resetPasswordForm.controls;
   }
+
+
 
 }
