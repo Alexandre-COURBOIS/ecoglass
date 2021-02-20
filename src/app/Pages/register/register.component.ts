@@ -13,7 +13,7 @@ import {NgxUiLoaderService} from 'ngx-ui-loader';
 export class RegisterComponent implements OnInit {
 
   registerForm = new FormGroup({
-    surname: new FormControl(), name: new FormControl(),
+    surname: new FormControl(), name: new FormControl(), pseudo: new FormControl(),
     email: new FormControl(), address: new FormControl(), city: new FormControl(),
     postalCode: new FormControl(), password: new FormControl(), verifPassword: new FormControl()
   });
@@ -30,13 +30,13 @@ export class RegisterComponent implements OnInit {
 
   initForm() {
     this.registerForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      surname: ['', [Validators.required, Validators.minLength(2)]],
-      pseudo: ['', [Validators.required, Validators.minLength(3)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[A-Za-z]+$')]],
+      surname: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[A-Za-z]+$')]],
+      pseudo: ['', [Validators.required, Validators.minLength(3), Validators.pattern('^[A-Za-z0-9]+$')]],
       email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      address: ['', [Validators.required, Validators.minLength(10)]],
-      city: ['', [Validators.required, Validators.minLength(2)]],
-      postalCode: ['', Validators.required],
+      address: ['', [Validators.required, Validators.minLength(10),Validators.pattern('^[a-zA-Z0-9 _]*$')]],
+      city: ['', [Validators.required, Validators.minLength(2),Validators.pattern('^[A-Za-z \-]+$')]],
+      postalCode: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
       verifPassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
     });

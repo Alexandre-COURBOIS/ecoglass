@@ -9,23 +9,27 @@ import {UserService} from '../../Services/user.service';
 import {CookieService} from 'ngx-cookie-service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ResetPasswordService} from '../../Services/reset-password.service';
+import {EncryptServiceService} from '../../Services/encrypt-service.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
+  username !: string;
   closeResult = '';
   submitted = false;
   submittedReset = false;
   authForm = new FormGroup({email: new FormControl(), password: new FormControl()});
   resetPasswordForm = new FormGroup({email: new FormControl()});
 
+
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private toastr: ToastrService,
               private ngxService: NgxUiLoaderService, private userService: UserService, private cookieService: CookieService, private modalService: NgbModal,
-              private resetPasswordService: ResetPasswordService) {
+              private resetPasswordService: ResetPasswordService, private encryptService: EncryptServiceService) {
   }
 
   ngOnInit() {
@@ -74,7 +78,9 @@ export class LoginComponent implements OnInit {
           this.userService.getUserByEmail(userEmail).subscribe(user => {
 
             // @ts-ignore
-            this.cookieService.set('_logged', true);
+            var encodedStatus = this.encryptService.encode("true");
+            // @ts-ignore
+            this.cookieService.set('_logged', encodedStatus);
             // @ts-ignore
             this.cookieService.set('_id', user.id);
             // @ts-ignore
@@ -84,7 +90,9 @@ export class LoginComponent implements OnInit {
             // @ts-ignore
             this.cookieService.set('_pseudo', user.pseudo);
             // @ts-ignore
-            this.cookieService.set('_email', user.email);
+            var encodedMail = this.encryptService.encode(user.email);
+            // @ts-ignore
+            this.cookieService.set('_email', encodedMail);
             // @ts-ignore
             this.cookieService.set('_city', user.city);
             // @ts-ignore
@@ -94,28 +102,37 @@ export class LoginComponent implements OnInit {
 
             this.router.navigate(['/user-profil']).then(logged => {
               // @ts-ignore
-              this.toastr.success('Bienvenue ' + user.surname);
+
+              let logValue = this.encryptService.encode("true");
+
+              sessionStorage.setItem('firstLog', logValue);
+
+              window.location.reload();
 
             });
           }, error => {
-            console.log(error);
+            this.submitted = false;
           });
 
           this.ngxService.stopLoader('loader-01');
 
         }, error => {
           if (error.error.message) {
+            this.submitted = false;
             this.toastr.error('Email ou mot de passe incorrect');
+            this.submitted = false;
           }
           this.ngxService.stopLoader('loader-01');
         });
       } else {
         this.toastr.error('Tiens ? Les informations renseignées ne sont pas correct !', 'Oups une erreur ?');
         this.ngxService.stopLoader('loader-01');
+        this.submitted = false;
       }
     } else {
       this.toastr.error('Il semblerait que le formulaire n\'est pas renseigné correctement !', 'Oups une erreur ?');
       this.ngxService.stopLoader('loader-01');
+      this.submitted = false;
     }
   }
 
@@ -165,5 +182,7 @@ export class LoginComponent implements OnInit {
   get fp() {
     return this.resetPasswordForm.controls;
   }
+
+
 
 }

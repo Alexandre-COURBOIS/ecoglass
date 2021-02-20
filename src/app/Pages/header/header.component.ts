@@ -1,4 +1,9 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CookieService} from 'ngx-cookie-service';
+import jwtDecode from 'jwt-decode';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {EncryptServiceService} from '../../Services/encrypt-service.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +12,39 @@ import {Component, HostListener, OnInit} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() {
+  logged = false;
+
+  constructor(private cookieService: CookieService, private router : Router, private toastr: ToastrService, private encryptService: EncryptServiceService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
+    const jwt = this.cookieService.get('_token');
+    const emailCookie = this.cookieService.get('_email');
+    const email = this.encryptService.decode(emailCookie);
+    const surname = this.cookieService.get('_surname');
+    const log = sessionStorage.getItem('firstLog')
+
+    // @ts-ignore
+    if (this.encryptService.decode(this.cookieService.get('_logged')) === 'true' && jwt && jwtDecode(jwt).username === email) {
+
+      this.logged = true;
+
+      // @ts-ignore
+      if (this.encryptService.decode(log) === "true") {
+
+        this.toastr.success('Bienvenue ' + surname);
+
+        sessionStorage.setItem('firstLog', this.encryptService.encode("false"));
+      }
+    }
+  }
+
+  logOut(){
+    this.cookieService.deleteAll();
+    this.router.navigate(['/login']).then(r => {
+      window.location.reload();
+    });
 
   }
 
