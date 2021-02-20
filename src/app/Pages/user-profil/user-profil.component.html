@@ -1,1 +1,51 @@
-<p>user-profil works!</p>
+<div class="background">
+  <div style="position: relative; top: 500px">
+    <ngx-ui-loader [hasProgressBar]="false" [loaderId]="'loader-01'"></ngx-ui-loader>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 colonne col1">
+        <p class="userInfs">Informations générales</p>
+        <hr>
+        <div class="userInformations">
+          <form [formGroup]="updateGeneralForm" (ngSubmit)="generalFormSubmit()">
+            <label class="labelForm">Prénom :</label>
+            <input type="text" formControlName="surname">
+            <label class="labelForm">Nom :</label>
+            <input type="text" formControlName="name">
+            <label class="labelForm">Pseudo :</label>
+            <input type="text" formControlName="pseudo">
+            <label class="labelForm">Email :</label>
+            <input type="email" formControlName="email">
+            <div>
+              <button [disabled]="submitted === true" class="btn btn-success">MODIFIER</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6 colonne col2">
+        <p class="userInfs">Détails</p>
+        <hr>
+        <form [formGroup]="updateDetailsForm" (ngSubmit)="detailsFormSubmit()">
+          <label class="labelForm">Adresse :</label>
+          <input type="text" formControlName="address" [value]="address">
+          <label class="labelForm">Code postal :</label>
+          <input type="text" formControlName="postalCode" [value]="postalCode">
+          <label class="labelForm">Ville :</label>
+          <input type="text" formControlName="city" [value]="city">
+          <div>
+            <button [disabled]="submitted === true" class="btn btn-success">MODIFIER</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-12 text-center">
+        <div class="updatePwd">
+          <p>Vous souhaitez modifier votre mot de passe ?</p>
+        </div>
+        <div class="buttonPwdContainer">
+          <button class="btn btn-secondary buttonPwd">MODIFIER VOTRE MOT DE PASSE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
