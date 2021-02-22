@@ -43,9 +43,80 @@
           <p>Vous souhaitez modifier votre mot de passe ?</p>
         </div>
         <div class="buttonPwdContainer">
-          <button class="btn btn-secondary buttonPwd">MODIFIER VOTRE MOT DE PASSE</button>
+          <button [disabled]="submitted === true" (click)="open(content)" class="btn btn-secondary buttonPwd">MODIFIER VOTRE MOT DE PASSE</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div style="background: green; color: white" class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Envie de changement ?</h4>
+    <button style="color: white" type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div style="background: #FAFAFA;" class="modal-body">
+    <form [formGroup]="updatePasswordForm" (ngSubmit)="submitNewPassWordForm()">
+      <div class="row">
+        <div class="col-md-12 col12modal">
+          <div class="form-group">
+            <div class="input-group">
+              <input placeholder="Ancien mot de passe"
+                     style="width: 100%; border: none; border-bottom: 1px solid rgba(0,0,0,0.3); background: #FAFAFA"
+                     type="password" formControlName="oldPassword">
+            </div>
+          </div>
+          <div class="error" *ngIf="submitted && fp.oldPassword.errors && fp.oldPassword.errors.required">Merci de renseigner
+            votre mot de passe actuel.
+          </div>
+          <div class="error"
+               *ngIf="updatePasswordForm.get('oldPassword')?.value && fp.oldPassword.errors && fp.oldPassword.errors.pattern">
+            Votre mot de passe actuel est composé d'au moins : 8 caractères, une lettre majuscule, un chiffre et un caractère spécial.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="input-group">
+              <input placeholder="Nouveau mot de passe"
+                     style="width: 100%; border: none; border-bottom: 1px solid rgba(0,0,0,0.3); background: #FAFAFA"
+                     type="password" formControlName="newPassword">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="input-group">
+              <input placeholder="Confirmer mot de passe"
+                     style="width: 100%; border: none; border-bottom: 1px solid rgba(0,0,0,0.3); background: #FAFAFA"
+                     type="password" formControlName="verifNewPassword">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 errorPassword">
+          <div class="error" *ngIf="submitted && fp.newPassword.errors && fp.newPassword.errors.required">Merci de renseigner
+            votre mot de passe actuel.
+          </div>
+          <div class="error"
+               *ngIf="updatePasswordForm.get('newPassword')?.value && fp.newPassword.errors && fp.newPassword.errors.pattern">
+            Votre nouveau mot de passe doit tout comme l'ancien être composé d'au moins, 8 caractères, une lettre majuscule, un chiffre et un caractère spécial.
+          </div>
+
+          <div class="error" *ngIf="submitted && fp.verifNewPassword.errors && fp.verifNewPassword.errors.required">Merci de renseigner
+            votre mot de passe actuel.
+          </div>
+          <div class="error"
+               *ngIf="updatePasswordForm.get('verifNewPassword')?.value && fp.verifNewPassword.errors && fp.verifNewPassword.errors.pattern">
+            Votre nouveau mot de passe doit tout comme l'ancien être composé d'au moins, 8 caractères, une lettre majuscule, un chiffre et un caractère spécial.
+          </div>
+        </div>
+      </div>
+      <div class="text-right">
+        <input type="submit" class="btn btn-success" [disabled]="updatePasswordForm.invalid" (click)="modal.close()" value="Envoyer !">
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+

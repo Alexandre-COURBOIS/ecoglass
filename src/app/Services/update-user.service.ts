@@ -28,5 +28,12 @@ export class UpdateUserService {
       });
     }
 
+    updatePasswordInformations(oldPassword: string, newPassword: string, verifNewPassword: string) {
+    return this.httpClient.put(environment.API_URL + 'api/user/update/password', {
+      oldPassword: oldPassword,
+      password: newPassword,
+      verifPassword: verifNewPassword
+    });
+    }
 
   }

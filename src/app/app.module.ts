@@ -6,10 +6,6 @@ import {HomeComponent} from './Pages/home/home.component';
 import {LoginComponent} from './Pages/login/login.component';
 import {MapComponent} from './Pages/map/map.component';
 import {RegisterComponent} from './Pages/register/register.component';
-import {UpdateUserComponent} from './Pages/update-user/update-user.component';
-import {UpdateUserPersonnalInformationsComponent} from './Pages/update-user/update-user-personnal-informations/update-user-personnal-informations.component';
-import {UpdateUserContactInformationsComponent} from './Pages/update-user/update-user-contact-informations/update-user-contact-informations.component';
-import {UpdateUserPasswordComponent} from './Pages/update-user/update-user-password/update-user-password.component';
 import {UserProfilComponent} from './Pages/user-profil/user-profil.component';
 import {NotFound404Component} from './Pages/not-found404/not-found404.component';
 import {HeaderComponent} from './Pages/header/header.component';
@@ -35,10 +31,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     MapComponent,
     RegisterComponent,
-    UpdateUserComponent,
-    UpdateUserPersonnalInformationsComponent,
-    UpdateUserContactInformationsComponent,
-    UpdateUserPasswordComponent,
     UserProfilComponent,
     NotFound404Component,
     HeaderComponent,
