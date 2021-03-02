@@ -35,10 +35,13 @@ export class MapComponent implements OnInit {
         geojson.features.push({
           geometry: {
             type: 'Point',
+            // @ts-ignore
             coordinates: [value[i].longitude, value[i].latitude]
           },
           properties: {
+            // @ts-ignore
             address: value[i].address,
+            // @ts-ignore
             postalCodeAndCity: value[i].postalCode + value[i].city
           }
         })
@@ -47,8 +50,10 @@ export class MapComponent implements OnInit {
 
       this.map.on('load', () => {
 
+
         this.map.addSource('earthquakes', {
           type: 'geojson',
+          // @ts-ignore
           data: geojson,
           cluster: true,
           clusterMaxZoom: 14, // Max zoom to cluster points on
