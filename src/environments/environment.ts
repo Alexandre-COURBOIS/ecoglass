@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://127.0.0.1:8000/'
+  API_URL: 'http://127.0.0.1:8000/',
+  mapBoxKey: 'pk.eyJ1Ijoib3dkYWQiLCJhIjoiY2tsMTI4Z2VpMGRrazJ1bzQwYTM2d3NhbiJ9.f7V1kPlLpPrQdIU-vXoiNA'
 };
 
 /*
