@@ -3,6 +3,7 @@ import {CanActivate, Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
 import jwtDecode from 'jwt-decode';
 import {EncryptServiceService} from './encrypt-service.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class AuthGuardService implements CanActivate {
 
   constructor(private router: Router, private cookieService: CookieService, private encryptService: EncryptServiceService) {
   }
+
 
   // @ts-ignore
   canActivate(): Observable<boolean> | Promise<Boolean> | Boolean {
