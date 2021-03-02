@@ -10,7 +10,7 @@
 }
 
 form {
-  padding: 5% 0;
+  padding: 5% 0 3% 0;
 }
 
 input {
@@ -24,4 +24,18 @@ input {
 
 .container-error {
   margin: 10px 0;
+}
+
+.forgotPassword{
+  padding-bottom: 2%;
+}
+
+.forgotPassword a {
+  cursor: pointer;
+  color: black;
+}
+
+
+.forgotPassword a:hover {
+  color: grey;
 }

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpdateUserComponent } from './update-user.component';
+import { ResetPasswordComponent } from './reset-password.component';
 
-describe('UpdateUserComponent', () => {
-  let component: UpdateUserComponent;
-  let fixture: ComponentFixture<UpdateUserComponent>;
+describe('ResetPasswordComponent', () => {
+  let component: ResetPasswordComponent;
+  let fixture: ComponentFixture<ResetPasswordComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UpdateUserComponent ]
+      declarations: [ ResetPasswordComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UpdateUserComponent);
+    fixture = TestBed.createComponent(ResetPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
