@@ -11,8 +11,9 @@
   src: local('Ryman'), url("./assets/font/RymanEco-Regular.otf") format("truetype");
 }
 
-body {
+body,html {
   background-color: #FAFAFA;
+  height: 100%;
 }
 
 .container-error {
