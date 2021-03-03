@@ -26,6 +26,7 @@ export class MapComponent implements OnInit {
         zoom: 5,
         center: [2.209667, 46.232193]
       });
+
       var geojson = {
         type: 'FeatureCollection',
         features: [{}],
@@ -50,117 +51,133 @@ export class MapComponent implements OnInit {
 
       this.map.on('load', () => {
 
+        this.map.loadImage(
+          'assets/image/recycling-bin.png',
+          (error, image) => {
+            if (error) throw error;
+            // @ts-ignore
+            this.map.addImage('recycling-bin', image);
 
-        this.map.addSource('containers', {
-          type: 'geojson',
-          // @ts-ignore
-          data: geojson,
-          cluster: true,
-          clusterMaxZoom: 12,
-          clusterRadius: 50
-        });
+            this.map.addControl(
+              new mapboxgl.GeolocateControl({
+                positionOptions: {
+                  enableHighAccuracy: true
+                },
+                trackUserLocation: true
+              })
+            );
 
-        this.map.addLayer({
-          id: 'clusters',
-          type: 'circle',
-          source: 'containers',
-          filter: ['has', 'point_count'],
-          paint: {
-            'circle-color': [
-              'step',
-              ['get', 'point_count'],
-              '#51bbd6',
-              100,
-              '#f1f075',
-              750,
-              '#f28cb1'
-            ],
-            'circle-radius': [
-              'step',
-              ['get', 'point_count'],
-              20,
-              100,
-              30,
-              750,
-              40
-            ]
-          }
-        });
+            this.map.addSource('containers', {
+              type: 'geojson',
+              // @ts-ignore
+              data: geojson,
+              cluster: true,
+              clusterMaxZoom: 12,
+              clusterRadius: 50
+            });
 
-        this.map.addLayer({
-          id: 'cluster-count',
-          type: 'symbol',
-          source: 'containers',
-          filter: ['has', 'point_count'],
-          layout: {
-            'text-field': '{point_count_abbreviated}',
-            'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            'text-size': 12
-          }
-        });
+            this.map.addLayer({
+              id: 'clusters',
+              type: 'circle',
+              source: 'containers',
+              filter: ['has', 'point_count'],
+              paint: {
+                'circle-color': [
+                  'step',
+                  ['get', 'point_count'],
+                  '#51bbd6',
+                  100,
+                  '#f1f075',
+                  750,
+                  '#f28cb1'
+                ],
+                'circle-radius': [
+                  'step',
+                  ['get', 'point_count'],
+                  20,
+                  100,
+                  30,
+                  750,
+                  40
+                ]
+              }
+            });
 
-        this.map.addLayer({
-          id: 'unclustered-point',
-          type: 'circle',
-          source: 'containers',
-          filter: ['!', ['has', 'point_count']],
-          paint: {
-            'circle-color': '#11b4da',
-            'circle-radius': 4,
-            'circle-stroke-width': 1,
-            'circle-stroke-color': '#fff'
-          }
-        });
+            this.map.addLayer({
+              id: 'cluster-count',
+              type: 'symbol',
+              source: 'containers',
+              filter: ['has', 'point_count'],
+              layout: {
+                'text-field': '{point_count_abbreviated}',
+                'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                'text-size': 12
+              }
+            });
 
-        this.map.on('click', 'clusters', (e) => {
-          var features = this.map.queryRenderedFeatures(e.point, {
-            layers: ['clusters']
-          });
-          // @ts-ignore
-          var clusterId = features[0].properties.cluster_id;
-          // @ts-ignore
-          this.map.getSource('containers').getClusterExpansionZoom(
-            clusterId,
-            (err: any, zoom: any) => {
-              if (err) return;
+            this.map.addLayer({
+              id: 'unclustered-point',
+              type: 'symbol',
+              source: 'containers',
+              filter: ['!', ['has', 'point_count']],
 
-              this.map.easeTo({
-                // @ts-ignore
-                center: features[0].geometry.coordinates,
-                zoom: zoom
+              layout: {
+                'icon-image': 'recycling-bin',
+                'icon-size': 1,
+              },
+              paint: {}
+            });
+
+            this.map.on('click', 'clusters', (e) => {
+              var features = this.map.queryRenderedFeatures(e.point, {
+                layers: ['clusters']
               });
-            }
-          );
-        });
+              // @ts-ignore
+              var clusterId = features[0].properties.cluster_id;
+              // @ts-ignore
+              this.map.getSource('containers').getClusterExpansionZoom(
+                clusterId,
+                (err: any, zoom: any) => {
+                  if (err) return;
 
-        this.map.on('click', 'unclustered-point', (e) => {
-          // @ts-ignore
-          var coordinates = e.features[0].geometry.coordinates.slice();
-          // @ts-ignore
-          var postalCodeAndCity = e.features[0].properties.postalCodeAndCity;
-          // @ts-ignore
-          var street = e.features[0].properties.street;
+                  this.map.easeTo({
+                    // @ts-ignore
+                    center: features[0].geometry.coordinates,
+                    zoom: zoom
+                  });
+                }
+              );
+            });
+
+            this.map.on('click', 'unclustered-point', (e) => {
+              // @ts-ignore
+              var coordinates = e.features[0].geometry.coordinates.slice();
+              // @ts-ignore
+              var postalCodeAndCity = e.features[0].properties.postalCodeAndCity;
+              // @ts-ignore
+              var street = e.features[0].properties.street;
 
 
-          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+              while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+              }
+
+              new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(
+                  street + '<br>' + postalCodeAndCity
+                )
+                .addTo(this.map);
+            });
+
+            this.map.on('mouseenter', 'clusters', () => {
+              this.map.getCanvas().style.cursor = 'pointer';
+            });
+            this.map.on('mouseleave', 'clusters', () => {
+              this.map.getCanvas().style.cursor = '';
+            });
           }
-
-          new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(
-              street + '<br>' + postalCodeAndCity
-            )
-            .addTo(this.map);
-        });
-
-        this.map.on('mouseenter', 'clusters', () => {
-          this.map.getCanvas().style.cursor = 'pointer';
-        });
-        this.map.on('mouseleave', 'clusters', () => {
-          this.map.getCanvas().style.cursor = '';
-        });
-
+      )
       })
 
 
