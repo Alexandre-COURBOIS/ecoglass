@@ -13,6 +13,7 @@ import {EncryptServiceService} from '../../Services/encrypt-service.service';
 export class HeaderComponent implements OnInit {
 
   logged = false;
+  surname!: string;
 
   constructor(private cookieService: CookieService, private router : Router, private toastr: ToastrService, private encryptService: EncryptServiceService) {
   }
@@ -24,6 +25,8 @@ export class HeaderComponent implements OnInit {
     const email = this.encryptService.decode(emailCookie);
     const surname = this.cookieService.get('_surname');
     const log = sessionStorage.getItem('firstLog')
+
+    this.surname = surname;
 
     // @ts-ignore
     if (this.encryptService.decode(this.cookieService.get('_logged')) === 'true' && jwt && jwtDecode(jwt).username === email) {
