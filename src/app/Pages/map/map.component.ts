@@ -40,9 +40,9 @@ export class MapComponent implements OnInit {
           },
           properties: {
             // @ts-ignore
-            address: value[i].address,
+            street: value[i].street,
             // @ts-ignore
-            postalCodeAndCity: value[i].postalCode + value[i].city
+            postalCodeAndCity: value[i].postalCode + ' ' + value[i].city
           }
         })
       }
@@ -51,26 +51,21 @@ export class MapComponent implements OnInit {
       this.map.on('load', () => {
 
 
-        this.map.addSource('earthquakes', {
+        this.map.addSource('containers', {
           type: 'geojson',
           // @ts-ignore
           data: geojson,
           cluster: true,
-          clusterMaxZoom: 14, // Max zoom to cluster points on
-          clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+          clusterMaxZoom: 12,
+          clusterRadius: 50
         });
 
         this.map.addLayer({
           id: 'clusters',
           type: 'circle',
-          source: 'earthquakes',
+          source: 'containers',
           filter: ['has', 'point_count'],
           paint: {
-// Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-// with three steps to implement three types of circles:
-//   * Blue, 20px circles when point count is less than 100
-//   * Yellow, 30px circles when point count is between 100 and 750
-//   * Pink, 40px circles when point count is greater than or equal to 750
             'circle-color': [
               'step',
               ['get', 'point_count'],
@@ -95,7 +90,7 @@ export class MapComponent implements OnInit {
         this.map.addLayer({
           id: 'cluster-count',
           type: 'symbol',
-          source: 'earthquakes',
+          source: 'containers',
           filter: ['has', 'point_count'],
           layout: {
             'text-field': '{point_count_abbreviated}',
@@ -107,7 +102,7 @@ export class MapComponent implements OnInit {
         this.map.addLayer({
           id: 'unclustered-point',
           type: 'circle',
-          source: 'earthquakes',
+          source: 'containers',
           filter: ['!', ['has', 'point_count']],
           paint: {
             'circle-color': '#11b4da',
@@ -116,6 +111,56 @@ export class MapComponent implements OnInit {
             'circle-stroke-color': '#fff'
           }
         });
+
+        this.map.on('click', 'clusters', (e) => {
+          var features = this.map.queryRenderedFeatures(e.point, {
+            layers: ['clusters']
+          });
+          // @ts-ignore
+          var clusterId = features[0].properties.cluster_id;
+          // @ts-ignore
+          this.map.getSource('containers').getClusterExpansionZoom(
+            clusterId,
+            (err: any, zoom: any) => {
+              if (err) return;
+
+              this.map.easeTo({
+                // @ts-ignore
+                center: features[0].geometry.coordinates,
+                zoom: zoom
+              });
+            }
+          );
+        });
+
+        this.map.on('click', 'unclustered-point', (e) => {
+          // @ts-ignore
+          var coordinates = e.features[0].geometry.coordinates.slice();
+          // @ts-ignore
+          var postalCodeAndCity = e.features[0].properties.postalCodeAndCity;
+          // @ts-ignore
+          var street = e.features[0].properties.street;
+
+
+          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+          }
+
+          new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(
+              street + '<br>' + postalCodeAndCity
+            )
+            .addTo(this.map);
+        });
+
+        this.map.on('mouseenter', 'clusters', () => {
+          this.map.getCanvas().style.cursor = 'pointer';
+        });
+        this.map.on('mouseleave', 'clusters', () => {
+          this.map.getCanvas().style.cursor = '';
+        });
+
       })
 
 
