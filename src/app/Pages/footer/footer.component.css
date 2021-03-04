@@ -1,0 +1,12 @@
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #FEFEFE;
+}
+
+a{
+  margin: 0 5%;
+  color: black;
+  text-decoration: none;
+}
