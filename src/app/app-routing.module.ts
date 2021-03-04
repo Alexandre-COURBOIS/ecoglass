@@ -15,7 +15,7 @@ import {LegalMentionComponent} from './Pages/legal-mention/legal-mention.compone
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'congitions-generales-utilisation', component: CguComponent},
+  {path: 'conditions-generales-utilisation', component: CguComponent},
   {path: 'mentions-legales', component: LegalMentionComponent},
   {path: 'register',/* canActivate: [LoggedGuardService],*/ component: RegisterComponent},
   {path: 'login',/* canActivate: [LoggedGuardService],*/ component: LoginComponent},
