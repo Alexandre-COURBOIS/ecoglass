@@ -39,3 +39,7 @@ input {
 .forgotPassword a:hover {
   color: grey;
 }
+
+.loginContainer {
+  margin-bottom: 5%;
+}
