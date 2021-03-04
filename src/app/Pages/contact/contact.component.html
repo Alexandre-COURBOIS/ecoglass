@@ -1,8 +1,12 @@
+<div style="position: relative; top: 500px">
+  <ngx-ui-loader [hasProgressBar]="false" [loaderId]="'loader-01'"></ngx-ui-loader>
+</div>
+
 <body>
 <div class="container-fluid">
   <div class="container">
     <div class="row justify-content-center">
-      <form class="text-center">
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="text-center">
         <p>Dites-nous tout <i class="fab fa-telegram-plane"></i></p>
         <div class="form-group">
           <input placeholder="Prenom" type="text" name="prenom" id="prenom" class="form-control inputField"
@@ -19,7 +23,7 @@
         <div class="form-group">
           <textarea name="message" id="message" placeholder="Votre message" formControlName="message" cols="20" rows="5"></textarea>
         </div>
-        <input class="btn btn-success" type="submit" value="Envoyer">
+        <input class="btn btn-success" type="submit" [disabled]="submitted" value="Envoyer">
       </form>
     </div>
   </div>
