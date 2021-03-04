@@ -10,9 +10,13 @@ import {AuthGuardService} from './Services/auth-guard.service';
 import {ContactComponent} from './Pages/contact/contact.component';
 import {LoggedGuardService} from './Services/logged-guard.service';
 import {ResetPasswordComponent} from './Pages/reset-password/reset-password.component';
+import {CguComponent} from './Pages/cgu/cgu.component';
+import {LegalMentionComponent} from './Pages/legal-mention/legal-mention.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'congitions-generales-utilisation', component: CguComponent},
+  {path: 'mentions-legales', component: LegalMentionComponent},
   {path: 'register',/* canActivate: [LoggedGuardService],*/ component: RegisterComponent},
   {path: 'login',/* canActivate: [LoggedGuardService],*/ component: LoginComponent},
   {path: 'reset-password/:token', component: ResetPasswordComponent},
