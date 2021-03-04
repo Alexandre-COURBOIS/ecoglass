@@ -22,6 +22,8 @@ import {LoggedGuardService} from './Services/logged-guard.service';
 import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
 import {DatePipe} from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CguComponent } from './Pages/cgu/cgu.component';
+import { LegalMentionComponent } from './Pages/legal-mention/legal-mention.component';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     FooterComponent,
     ContactComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    CguComponent,
+    LegalMentionComponent
   ],
   imports: [
     BrowserModule,
