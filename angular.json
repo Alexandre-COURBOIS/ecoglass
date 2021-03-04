@@ -134,5 +134,8 @@
       }
     }
   },
-  "defaultProject": "ecoglass"
+  "defaultProject": "ecoglass",
+  "cli": {
+    "analytics": false
+  }
 }
