@@ -1,5 +1,5 @@
 .container {
-  padding-top: 175px;
+  padding-top: 150px;
 }
 
 .row {
@@ -81,6 +81,39 @@ input {
     height: 700px;
   }
 }
+
+@media (max-width: 1880px) {
+  .container {
+    padding-bottom: 5%;
+  }
+}
+
+@media (max-width: 1150px) {
+  .container {
+    padding-bottom: 10%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-bottom: 20%;
+  }
+}
+
+@media (max-width: 426px) {
+  .container {
+    padding-bottom: 25%;
+  }
+}
+
+@media (max-width: 384px) {
+  .container {
+    padding-bottom: 35%;
+  }
+}
+
+
+
 
 
 

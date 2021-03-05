@@ -85,3 +85,28 @@ button{
 .form-group{
   margin-top: 2%;
 }
+
+@media (max-width: 767px) {
+  .rowForm {
+    padding-bottom: 15%;
+  }
+}
+
+@media (max-width: 435px) {
+  .rowForm {
+    padding-bottom: 25%;
+  }
+}
+
+@media (max-width: 384px) {
+  .rowForm {
+    padding-bottom: 35%;
+  }
+}
+
+@media (max-width: 340px) {
+  .rowForm {
+    padding-bottom: 50%;
+  }
+}
+
