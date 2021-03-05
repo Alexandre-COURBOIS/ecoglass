@@ -1,3 +1,28 @@
 .container-fluid {
-  padding-top: 175px;
+  background: url("src/assets/image/home/background_green_4.png") no-repeat;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-color: rgba(255,255,255,.5);
+}
+
+h1{
+  color: white;
+  font-weight: bolder;
+  font-size: 65px;
+  text-transform: uppercase;
+  font-family: Ryman;
+}
+
+p {
+  font-weight: bolder;
+  font-family: "Roboto Light";
+  font-size: 30px;
+  text-transform: capitalize;
+  margin-bottom: 0;
+  color: white;
+}
+
+.container-xl {
+  padding-top: 250px;
 }
