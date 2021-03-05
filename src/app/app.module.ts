@@ -24,6 +24,7 @@ import {DatePipe} from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CguComponent } from './Pages/cgu/cgu.component';
 import { LegalMentionComponent } from './Pages/legal-mention/legal-mention.component';
+import { ProductPresentationComponent } from './Pages/product-presentation/product-presentation.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { LegalMentionComponent } from './Pages/legal-mention/legal-mention.compo
     ContactComponent,
     ResetPasswordComponent,
     CguComponent,
-    LegalMentionComponent
+    LegalMentionComponent,
+    ProductPresentationComponent
   ],
   imports: [
     BrowserModule,
