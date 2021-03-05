@@ -36,12 +36,32 @@ li a:hover {
 i {
   color: #28A745;
   font-size: 25px;
+ background-color: transparent;
 }
 
 ul li{
   padding: 0 5% 0 5%;
 }
 
+.fa-user {
+  background-color: rgba(255,255,255,0.8) !important;
+}
+
+.fa-user:before {
+  background-color: rgba(255,255,255,0.8) !important;
+}
+
+.btnLoginDrop {
+  background-color: rgba(255,255,255,0.8) !important;
+
+}
+
+.btnContainerLoginDrop {
+  background-color: rgba(255,255,255,0.8) !important;
+}
+ #dropdownMenuButton {
+   background-color: rgba(255,255,255,0.8) !important;
+ }
 header {
   background-color: rgba(255,255,255,0.8);
 }
@@ -54,3 +74,4 @@ header {
 .dropdown-item {
   cursor: pointer;
 }
+
