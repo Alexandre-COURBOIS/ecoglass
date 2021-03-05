@@ -43,3 +43,15 @@ input {
 .loginContainer {
   margin-bottom: 5%;
 }
+
+@media (max-width: 768px) {
+  .loginContainer {
+    margin-bottom: 25%;
+  }
+}
+
+@media (max-width: 384px) {
+  .loginContainer {
+    margin-bottom: 40%;
+  }
+}
