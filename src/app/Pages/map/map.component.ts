@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import * as mapboxgl from 'mapbox-gl';
-import {HttpClient} from "@angular/common/http";
+// @ts-ignore
+import * as MapBoxDirection from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import {ContainersService} from "../../Services/containers.service";
 
 @Component({
@@ -12,6 +13,7 @@ import {ContainersService} from "../../Services/containers.service";
 export class MapComponent implements OnInit {
   // @ts-ignore
   private map: mapboxgl.Map;
+  private direction: MapBoxDirection;
 
   constructor(private containerService: ContainersService) {
   }
@@ -20,13 +22,25 @@ export class MapComponent implements OnInit {
     this.containerService.getContainer().subscribe(value => {
       // @ts-ignore
       mapboxgl.accessToken = environment.mapBoxKey;
+
+      this.direction = new MapBoxDirection({
+        accessToken: environment.mapBoxKey,
+        unit: 'metric',
+        profile: 'mapbox/cycling',
+        controls: {
+          inputs: true,
+          instructions: false,
+        },
+        language: 'fr'
+      });
+
       this.map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
         zoom: 5,
         center: [2.209667, 46.232193]
       });
-
+      this.map.addControl(this.direction);
       var geojson = {
         type: 'FeatureCollection',
         features: [{}],
@@ -48,6 +62,14 @@ export class MapComponent implements OnInit {
         })
       }
       console.log(geojson);
+
+       this.direction = new MapBoxDirection({
+        accessToken: environment.mapBoxKey,
+        unit: 'metric',
+        profile: 'mapbox/cycling',
+        language: 'fr',
+        interactive: false
+      });
 
       this.map.on('load', () => {
 
@@ -150,6 +172,9 @@ export class MapComponent implements OnInit {
             });
 
             this.map.on('click', 'unclustered-point', (e) => {
+              const getThisDirection = () => {
+                return this.direction;
+              }
               // @ts-ignore
               var coordinates = e.features[0].geometry.coordinates.slice();
               // @ts-ignore
@@ -165,9 +190,19 @@ export class MapComponent implements OnInit {
               new mapboxgl.Popup()
                 .setLngLat(coordinates)
                 .setHTML(
-                  street + '<br>' + postalCodeAndCity
+                  street + '<br>' + postalCodeAndCity + '<button class="btn btn-primary" id="btn">lets go</button>'
                 )
                 .addTo(this.map);
+
+              // @ts-ignore
+              document.getElementById("btn").addEventListener("click", function(){
+                var directions = getThisDirection();
+                navigator.geolocation.getCurrentPosition(position => {
+                  directions.setOrigin(position.coords.longitude + ',' + position.coords.latitude)
+                });
+
+                directions.setDestination(coordinates)
+              });
             });
 
             this.map.on('mouseenter', 'clusters', () => {
@@ -177,7 +212,7 @@ export class MapComponent implements OnInit {
               this.map.getCanvas().style.cursor = '';
             });
           }
-      )
+        )
       })
 
 
