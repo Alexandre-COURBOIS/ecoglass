@@ -7,7 +7,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav text-center mr-auto">
         <li class="nav-item active">
           <a class="nav-link" routerLink="">ECOGLASS<span class="sr-only">(current)</span></a>
         </li>
@@ -25,10 +25,10 @@
         <ng-template #trueTemp>
           <div class="btn-group">
             <button id="dropdownMenuButton" data-toggle="dropdown">
-            <i class="far fa-user"></i>
+              <i class="far fa-user"></i>
             </button>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" routerLink="user-profil">PROFIL</a>
+            <a class="dropdown-item" routerLink="user-profil">PROFIL {{surname | uppercase}}</a>
             <a class="dropdown-item" (click)="logOut()">DECONNEXION</a>
           </div>
         </div>
