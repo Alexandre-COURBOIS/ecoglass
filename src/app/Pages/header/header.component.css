@@ -9,7 +9,7 @@ img {
 }
 
 .navbar-brand {
-  width: 42%;
+  width: 35%;
   height: 100%;
 }
 
@@ -22,7 +22,9 @@ a {
   font-size: 12px !important;
   font-weight: bold;
 }
-
+li a {
+  font-size: 20px !important;
+}
 li a:hover {
   color: #373737 !important;
 }
