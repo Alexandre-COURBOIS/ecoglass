@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import * as mapboxgl from 'mapbox-gl';
-import {HttpClient} from "@angular/common/http";
+// @ts-ignore
+import * as MapBoxDirection from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import {ContainersService} from "../../Services/containers.service";
 
 @Component({
@@ -66,6 +67,16 @@ export class MapComponent implements OnInit {
                 trackUserLocation: true
               })
             );
+
+            var direction = new MapBoxDirection({
+              accessToken: environment.mapBoxKey,
+              unit: 'metric',
+              profile: 'mapbox/cycling',
+              language: 'fr',
+              interactive: false
+            })
+
+            this.map.addControl(direction, 'top-left');
 
             this.map.addSource('containers', {
               type: 'geojson',
