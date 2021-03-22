@@ -1,5 +1,6 @@
 .container {
   padding-top: 150px;
+  height: 100%;
 }
 #map {
   width: 100%;
