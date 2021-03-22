@@ -25,7 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CguComponent } from './Pages/cgu/cgu.component';
 import { LegalMentionComponent } from './Pages/legal-mention/legal-mention.component';
 import { ProductPresentationComponent } from './Pages/product-presentation/product-presentation.component';
-import {MapboxEvent} from 'mapbox-gl';
+
 
 
 @NgModule({
