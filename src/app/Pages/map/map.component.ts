@@ -62,7 +62,6 @@ export class MapComponent implements OnInit {
           }
         })
       }
-      //console.log(geojson);
 
        this.direction = new MapBoxDirection({
         accessToken: environment.mapBoxKey,
