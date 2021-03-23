@@ -13,6 +13,7 @@ import {ResetPasswordComponent} from './Pages/reset-password/reset-password.comp
 import {CguComponent} from './Pages/cgu/cgu.component';
 import {LegalMentionComponent} from './Pages/legal-mention/legal-mention.component';
 import {ProductPresentationComponent} from './Pages/product-presentation/product-presentation.component';
+import {TeamPageComponent} from './Pages/team-page/team-page.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'login', canActivate: [LoggedGuardService], component: LoginComponent},
   {path: 'reset-password/:token', component: ResetPasswordComponent},
   {path: 'contact', component: ContactComponent},
+  {path: 'notre-equipe', component: TeamPageComponent},
   {path: 'user-profil', canActivate: [AuthGuardService], component: UserProfilComponent},
   {path: 'map', canActivate: [AuthGuardService], component: MapComponent},
   {path: '404NotFound', component: NotFound404Component},

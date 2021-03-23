@@ -25,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CguComponent } from './Pages/cgu/cgu.component';
 import { LegalMentionComponent } from './Pages/legal-mention/legal-mention.component';
 import { ProductPresentationComponent } from './Pages/product-presentation/product-presentation.component';
+import { TeamPageComponent } from './Pages/team-page/team-page.component';
 
 
 
@@ -43,7 +44,8 @@ import { ProductPresentationComponent } from './Pages/product-presentation/produ
     ResetPasswordComponent,
     CguComponent,
     LegalMentionComponent,
-    ProductPresentationComponent
+    ProductPresentationComponent,
+    TeamPageComponent
   ],
   imports: [
     BrowserModule,

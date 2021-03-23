@@ -36,6 +36,7 @@
     "ngx-cookie-service": "^11.0.2",
     "ngx-toastr": "^13.2.0",
     "ngx-ui-loader": "^10.0.0",
+    "npm": "^7.6.0",
     "popper.js": "^1.16.1",
     "rxjs": "^6.6.6",
     "rxjs-compat": "^6.6.6",
