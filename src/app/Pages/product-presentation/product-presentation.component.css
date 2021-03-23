@@ -1,22 +1,43 @@
-.font-face {
-
+@font-face {
+ font-family: "Ryman";
+  src: url("src/assets/font/RymanEco-Regular.otf") format("otf");
 }
 
 .global {
   padding: 150px 0;
 }
+
+.backgroundgroup {
+  display: flex;
+  justify-content: space-around;
+}
+
+.background {
+  width: 70%;
+  top: 50px;
+  position: fixed;
+  z-index: -1;
+}
+
 .container-product {
   background-color: white;
+  opacity: 80%;
   width: 80%;
   height: 100%;
   margin: 0 auto;
   border: white 1px solid;
   border-radius: 25px;
   box-shadow: 0 0 25px 5px rgb(173 156 156);
+  padding-bottom: 75px;
 }
 
-.product-title {
-  text-align:center;
+.div-img-title {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.titre-image {
+  width: 100%;
 }
 
 .product-text {
@@ -32,6 +53,7 @@
 }
 
 .section2 img {
+  width: 300px;
   grid-column: 1;
   margin: 0 auto;
 }
@@ -46,14 +68,13 @@
 .para1-product {
   margin-top: 95px;
   line-height: 35px;
-
 }
 
 .para2-product {
   grid-column: 2;
   grid-row: 1;
   text-align: center;
-  margin-top: 170px;
+  margin-top: 20px;
   line-height: 35px;
   color: red;
 }
@@ -64,36 +85,44 @@
 
 .product-subtitle {
   text-align: center;
+  margin-bottom: 50px;
+  font-family: "Ryman", sans-serif;
 }
 
-.win-text {
+.points {
+  font-size: 1.2em;
+  margin-top: 20px;
   text-align: center;
-  font-size: 1.3em;
+}
+
+i {
+  color: #218838;
+}
+
+.warning {
+  color: red;
+  font-family: "Ryman", sans-serif;
+  text-align: center;
   margin-top: 50px;
 }
 
-.center {
-  width: 50%;
-  margin: 0 auto;
+@media screen and (max-width: 1080px) {
+  .div-img-title {
+    width: 50%;
+  }
+  .section2 {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  .section3 {
+    margin-top: 35px;
+  }
+  .product-subtitle {
+    margin: 20px 0;
+  }
+  .para1-product {
+    margin-top: 0;
+  }
 }
 
-.img-tableau {
-  width: 100%;
-}
-
-.img-background {
-  width: 50%;
-  margin: 0 auto;
-}
-
-.background-product {
-  width: 50%;
-}
-
-.container-content {
-  width:60%;
-  height: 2000px;
-  background-color: white;
-  margin: 0 auto;
-  opacity: 80%;
-}
