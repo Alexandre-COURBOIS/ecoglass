@@ -219,8 +219,8 @@ export class MapComponent implements OnInit {
                   popup.setLngLat(coordinates)
                     .setHTML(
                       // @ts-ignore
-                      '<p>' + 'à ' + distance.toFixed([2]) + ' km de chez vous</p>' +
-                      '<p>' + street + '<br>' + postalCodeAndCity + '</p>' + '<button class="btn btn-primary" id="btn">M\'y emmener</button>'
+                      '<div class="card" style="border:none !important;"><p class="h5 font-weight-bold text-center">' + street + '<br>' + postalCodeAndCity + '</p><p class="ml-1">' + 'à ' + distance.toFixed([2]) + ' km de chez vous</p>' +
+                      '<button class="btn btn-success" id="btn">M\'y emmener <i class="fas fa-map-marker-alt"></i></button></div>'
                     )
 
                   // @ts-ignore
