@@ -53,4 +53,22 @@ export class HomeComponent implements OnInit {
     this.show = !this.show;
   }
 
+  setMap(el: string) {
+     let image = document.getElementById("containerImg");
+
+     if (el === "showMap") {
+     // @ts-ignore
+    image.className = "map";
+     } else if (el === "showRegister") {
+       // @ts-ignore
+       image.className = "register";
+     } else if (el === "showProfil") {
+       // @ts-ignore
+       image.className = "showProfil";
+     }
+   console.log(el)
+
+  }
+
+
 }
