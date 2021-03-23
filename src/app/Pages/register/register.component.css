@@ -1,3 +1,7 @@
+.container-fluid {
+  padding-bottom: 50px;
+}
+
 .container {
   padding-top: 150px;
 }

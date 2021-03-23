@@ -1,16 +1,63 @@
-
 <div class="container-fluid containerTop">
-  <div class="container-xl">
+  <div class="container-xl containerTop2">
     <div class="row">
       <div class="col-md-6">
       </div>
       <div class="col-md-6 text-right colright">
         <h1>Ecoglass</h1>
-        <p>Un geste citoyen</p>
-        <p>qui nous avantage tous.</p>
-        <p id="rollMenu">{{rollMenu}}</p>
+        <p class="p1">Un geste citoyen</p>
+        <p class="p1">qui nous avantage tous.</p>
+        <p class="p1" id="rollMenu">{{rollMenu}}</p>
         <div routerLink="/register" class="btn btn-primary btnJoin">Rejoignez-nous !</div>
-      </div>>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid containerSelect">
+    <div class="row">
+      <div class="col-md-3 colSelect text-left">
+        <p (click)="setMap('showRegister')" class="select mt-5 mb-5" id="showRegister"><i class="fas fa-play mr-5 pl-3"></i>Inscription</p>
+        <p (click)="setMap('showMap')" id="showMap" class="select mt-5 mb-5"><i class="fas fa-play mr-5 pl-3"></i>Map</p>
+        <p (click)="setMap('showProfil')" class="select mt-5 mb-5"><i class="fas fa-play mr-5 pl-3"></i>Profil</p>
+      </div>
+      <div class="col-md-6" >
+        <div class="container-image" id="containerImg">
+
+        </div>
+      </div>
+      <div class="col-md-3 colSelect">
+        <p class="select mt-5 mb-5"><i class="fas fa-play mr-5 pl-3"></i>Avantages</p>
+        <p class="select mt-5 mb-5"><i class="fas fa-play mr-5 pl-3"></i>Récompenses</p>
+        <p class="select mt-5 mb-5"><i class="fas fa-play mr-5 pl-3"></i>Equipe</p>
+      </div>
+    </div>
+  </div>
+<div class="container-fluid background">
+  <div class="container-xl forEveryoneContainer">
+    <div class="container forEveryone">
+      <div class="text-center">
+        <h3 class="title">EcoGLass un site pour tous !</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p class="text-left forEveryonep">Etudiant</p>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam aut debitis dolore inventore maxime repudiandae, tempore? Cum debitis ex, exercitationem explicabo minima odit quos voluptas?
+          </div>
+        </div>
+        <div class="col-md-4">
+          <p class="text-left forEveryonep">Particulier</p>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda commodi cumque dolore error id nihil nisi? Cupiditate, deleniti dolor est officia sunt tempora unde velit.
+          </div>
+        </div>
+        <div class="col-md-4">
+          <p class="text-left forEveryonep">Entreprise</p>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam cumque dolore et laudantium odit officiis quasi, velit. Aperiam deserunt dolor facilis iusto minima? Architecto, ex.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -46,11 +93,6 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="container-fluid">
-  <div class="container-xl">
-
   </div>
 </div>
 
