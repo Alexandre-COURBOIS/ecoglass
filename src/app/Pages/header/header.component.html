@@ -20,7 +20,15 @@
       </ul>
       <span class="navbar-text">
         <div *ngIf="logged === false; else trueTemp">
-          <a  class="loginButton" routerLink="login"><i class="fas fa-sign-in-alt"></i></a>
+          <div class="btn-group btnContainerLoginDrop">
+            <button class="btnLoginDrop" id="dropdownMenuButton" data-toggle="dropdown">
+              <i class="fas fa-sign-in-alt"></i>
+            </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" routerLink="register">Inscription</a>
+            <a class="dropdown-item" routerLink="login">Connexion</a>
+          </div>
+        </div>
         </div>
         <ng-template #trueTemp>
           <div class="btn-group btnContainerLoginDrop">
