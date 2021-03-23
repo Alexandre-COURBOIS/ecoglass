@@ -75,7 +75,7 @@ export class MapComponent implements OnInit {
       this.map.on('load', () => {
 
         this.map.loadImage(
-          'assets/image/recycling-bin.png',
+          'assets/image/recycle.png',
           (error, image) => {
             if (error) throw error;
             // @ts-ignore
