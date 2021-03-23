@@ -1,6 +1,20 @@
-.container-product {
-  padding: 100px 0;
+.font-face {
+
 }
+
+.global {
+  padding: 150px 0;
+}
+.container-product {
+  background-color: white;
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  border: white 1px solid;
+  border-radius: 25px;
+  box-shadow: 0 0 25px 5px rgb(173 156 156);
+}
+
 .product-title {
   text-align:center;
 }
@@ -65,4 +79,21 @@
 
 .img-tableau {
   width: 100%;
+}
+
+.img-background {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.background-product {
+  width: 50%;
+}
+
+.container-content {
+  width:60%;
+  height: 2000px;
+  background-color: white;
+  margin: 0 auto;
+  opacity: 80%;
 }
