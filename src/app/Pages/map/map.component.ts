@@ -4,6 +4,7 @@ import * as mapboxgl from 'mapbox-gl';
 // @ts-ignore
 import * as MapBoxDirection from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import {ContainersService} from "../../Services/containers.service";
+import * as turf from '@turf/turf';
 
 @Component({
   selector: 'app-map',
@@ -61,7 +62,6 @@ export class MapComponent implements OnInit {
           }
         })
       }
-      console.log(geojson);
 
        this.direction = new MapBoxDirection({
         accessToken: environment.mapBoxKey,
@@ -74,7 +74,7 @@ export class MapComponent implements OnInit {
       this.map.on('load', () => {
 
         this.map.loadImage(
-          'assets/image/recycling-bin.png',
+          'assets/image/recycle.png',
           (error, image) => {
             if (error) throw error;
             // @ts-ignore
@@ -187,22 +187,54 @@ export class MapComponent implements OnInit {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
               }
 
-              new mapboxgl.Popup()
-                .setLngLat(coordinates)
-                .setHTML(
-                  street + '<br>' + postalCodeAndCity + '<button class="btn btn-primary" id="btn">lets go</button>'
-                )
-                .addTo(this.map);
-
-              // @ts-ignore
-              document.getElementById("btn").addEventListener("click", function(){
-                var directions = getThisDirection();
-                navigator.geolocation.getCurrentPosition(position => {
-                  directions.setOrigin(position.coords.longitude + ',' + position.coords.latitude)
-                });
-
-                directions.setDestination(coordinates)
+              const getUserLoc = () => new Promise((resolve,reject)=> {
+                navigator.geolocation.getCurrentPosition(
+                  position => {
+                    resolve(position);
+                  },
+                  error => {
+                    console.log(error.message);
+                    reject(error);
+                  },
+                  {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 1000
+                  }
+                );
               });
+
+              var popup = new mapboxgl.Popup();
+
+              popup.on('open', function(){
+                getUserLoc().then(position => {
+                  // @ts-ignore
+                  let userLng = position.coords.longitude;
+                  // @ts-ignore
+                  let userLat = position.coords.latitude;
+
+                  var distance = turf.distance([coordinates[0], coordinates[1]], [userLng, userLat], {units: "kilometers"});
+
+                  popup.setLngLat(coordinates)
+                    .setHTML(
+                      // @ts-ignore
+                      '<div class="card" style="border:none !important;"><p class="h5 font-weight-bold text-center">' + street + '<br>' + postalCodeAndCity + '</p><p class="ml-1">' + 'à ' + distance.toFixed([2]) + ' km de chez vous</p>' +
+                      '<button class="btn btn-success" id="btn">M\'y emmener <i class="fas fa-map-marker-alt"></i></button></div>'
+                    )
+
+                  // @ts-ignore
+                  document.getElementById("btn").addEventListener("click", function(){
+                    var directions = getThisDirection();
+                    navigator.geolocation.getCurrentPosition(position => {
+                      directions.setOrigin(position.coords.longitude + ',' + position.coords.latitude)
+                    });
+                    directions.setDestination(coordinates)
+                  });
+
+                });
+              });
+
+              popup.addTo(this.map);
             });
 
             this.map.on('mouseenter', 'clusters', () => {
