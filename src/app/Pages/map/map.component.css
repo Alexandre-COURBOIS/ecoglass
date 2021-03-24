@@ -6,4 +6,8 @@
   width: 100%;
   height: 80vh;
   background-color: transparent;
+  border-radius: 15px;
 }
+
+:host ::ng-deep .mapboxgl-canvas {
+  outline: none !important; }

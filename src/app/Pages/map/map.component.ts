@@ -188,50 +188,58 @@ export class MapComponent implements OnInit {
               }
 
               const getUserLoc = () => new Promise((resolve,reject)=> {
-                navigator.geolocation.getCurrentPosition(
-                  position => {
-                    resolve(position);
-                  },
-                  error => {
-                    console.log(error.message);
-                    reject(error);
-                  },
-                  {
-                    enableHighAccuracy: true,
-                    timeout: 10000,
-                    maximumAge: 1000
-                  }
-                );
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(
+                    position => {
+                      resolve(position);
+                    },
+                    error => {
+                      console.log(error.message);
+                      alert("Veuillez accepter l'utilisation de la géocalisation pour avoir accès à cette fonctionnalité")
+                      reject(error);
+                    },
+                    {
+                      enableHighAccuracy: true,
+                      timeout: 10000,
+                      maximumAge: 1000
+                    }
+                  );
+                }
               });
-
+              console.log(navigator.geolocation);
               var popup = new mapboxgl.Popup();
 
               popup.on('open', function(){
-                getUserLoc().then(position => {
-                  // @ts-ignore
-                  let userLng = position.coords.longitude;
-                  // @ts-ignore
-                  let userLat = position.coords.latitude;
+                if (navigator.geolocation) {
+                  getUserLoc().then(position => {
+                    // @ts-ignore
+                    let userLng = position.coords.longitude;
+                    // @ts-ignore
+                    let userLat = position.coords.latitude;
 
-                  var distance = turf.distance([coordinates[0], coordinates[1]], [userLng, userLat], {units: "kilometers"});
+                    var distance = turf.distance([coordinates[0], coordinates[1]], [userLng, userLat], {units: "kilometers"});
 
-                  popup.setLngLat(coordinates)
-                    .setHTML(
-                      // @ts-ignore
-                      '<div class="card" style="border:none !important;"><p class="h5 font-weight-bold text-center">' + street + '<br>' + postalCodeAndCity + '</p><p class="ml-1">' + 'à ' + distance.toFixed([2]) + ' km de chez vous</p>' +
-                      '<button class="btn btn-success" id="btn">M\'y emmener <i class="fas fa-map-marker-alt"></i></button></div>'
-                    )
+                    popup.setLngLat(coordinates)
+                      .setHTML(
+                        // @ts-ignore
+                        '<div class="card" style="border:none !important;"><p class="h5 font-weight-bold text-center">' + street + '<br>' + postalCodeAndCity + '</p><p class="ml-1">' + 'à ' + distance.toFixed([2]) + ' km de chez vous</p>' +
+                        '<button class="btn btn-success" id="btn">M\'y emmener <i class="fas fa-map-marker-alt"></i></button></div>'
+                      )
 
-                  // @ts-ignore
-                  document.getElementById("btn").addEventListener("click", function(){
-                    var directions = getThisDirection();
-                    navigator.geolocation.getCurrentPosition(position => {
-                      directions.setOrigin(position.coords.longitude + ',' + position.coords.latitude)
+                    // @ts-ignore
+                    document.getElementById("btn").addEventListener("click", function(){
+                      var directions = getThisDirection();
+                      navigator.geolocation.getCurrentPosition(position => {
+                        directions.setOrigin(position.coords.longitude + ',' + position.coords.latitude)
+                      });
+                      directions.setDestination(coordinates)
                     });
-                    directions.setDestination(coordinates)
-                  });
 
-                });
+                  });
+                } else {
+                  alert("Veuillez accepter l'utilisation de la géocalisation pour avoir accès à cette fonctionnalité")
+                }
+
               });
 
               popup.addTo(this.map);
