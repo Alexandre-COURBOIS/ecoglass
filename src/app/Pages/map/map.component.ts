@@ -27,10 +27,10 @@ export class MapComponent implements OnInit {
       this.direction = new MapBoxDirection({
         accessToken: environment.mapBoxKey,
         unit: 'metric',
-        profile: 'mapbox/cycling',
+        profile: 'mapbox/walking',
         controls: {
           inputs: true,
-          instructions: false,
+          instructions: true,
         },
         language: 'fr'
       });
@@ -111,7 +111,7 @@ export class MapComponent implements OnInit {
                   100,
                   '#f1f075',
                   750,
-                  '#f28cb1'
+                  '#AADD08'
                 ],
                 'circle-radius': [
                   'step',
