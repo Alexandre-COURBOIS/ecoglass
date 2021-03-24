@@ -194,9 +194,7 @@ export class MapComponent implements OnInit {
                       resolve(position);
                     },
                     error => {
-                      console.log(error.message);
                       alert("Veuillez accepter l'utilisation de la géocalisation pour avoir accès à cette fonctionnalité")
-                      reject(error);
                     },
                     {
                       enableHighAccuracy: true,
