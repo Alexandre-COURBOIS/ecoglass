@@ -14,6 +14,7 @@
 body,html {
   background-color: #FAFAFA;
   height: 100%;
+  width: 100%;
 }
 
 .container-error {

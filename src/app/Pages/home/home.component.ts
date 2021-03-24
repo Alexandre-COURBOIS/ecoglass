@@ -65,8 +65,13 @@ export class HomeComponent implements OnInit {
      } else if (el === "showProfil") {
        // @ts-ignore
        image.className = "showProfil";
+     } else if (el === "showTeam") {
+       // @ts-ignore
+       image.className = "showTeam";
+     } else if (el === "showAdvantage") {
+       // @ts-ignore
+       image.className = "showAdvantage";
      }
-   console.log(el)
 
   }
 
