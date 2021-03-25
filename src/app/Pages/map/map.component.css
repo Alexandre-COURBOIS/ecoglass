@@ -1,5 +1,6 @@
 body {
-  background-color: black;
+  background-size: cover;
+  background: #FAFAFA url("src/assets/image/map/backgroundMap.jpg") no-repeat;
 }
 
 .container-fluid {
@@ -12,6 +13,9 @@ body {
   height: 80vh;
   background-color: transparent;
   border-radius: 15px;
+  -webkit-box-shadow: 0px 0px 25px 10px rgba(174,167,184,1);
+  -moz-box-shadow: 0px 0px 25px 10px rgba(174,167,184,1);
+  box-shadow: 0px 0px 25px 10px rgba(174,167,184,1);
 }
 
 :host ::ng-deep .mapboxgl-canvas {
