@@ -33,12 +33,14 @@ export class HeaderComponent implements OnInit {
 
       this.logged = true;
 
-      // @ts-ignore
-      if (this.encryptService.decode(log) === "true") {
+      if (log) {
+        // @ts-ignore
+        if (this.encryptService.decode(log) === "true") {
 
-        this.toastr.success('Bienvenue ' + surname);
+          this.toastr.success('Bienvenue ' + surname);
 
-        sessionStorage.setItem('firstLog', this.encryptService.encode("false"));
+          sessionStorage.setItem('firstLog', this.encryptService.encode("false"));
+        }
       }
     }
   }
