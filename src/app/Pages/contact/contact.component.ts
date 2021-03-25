@@ -51,7 +51,8 @@ export class ContactComponent implements OnInit {
         this.contactService.sendContactMessage(prenom, nom, email, message).subscribe(value => {
           this.submitted = false;
           // @ts-ignore
-          this.toastr.success(value,'Votre message a bien été envoyé')
+          this.toastr.success(value,'Votre message a bien été envoyé');
+          this.contactForm.reset()
           this.ngxService.stopLoader('loader-01');
         }, error => {
           this.submitted = false;
