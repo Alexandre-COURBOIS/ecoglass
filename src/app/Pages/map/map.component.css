@@ -15,7 +15,8 @@ body {
 }
 
 :host ::ng-deep .mapboxgl-canvas {
-  outline: none !important; }
+  outline: none !important;
+}
 
 @media (max-width: 540px) {
   .container-fluid {
