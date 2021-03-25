@@ -1,7 +1,12 @@
+body {
+  background-color: black;
+}
+
 .container-fluid {
   height: 100%;
-  padding: 150px 10%;
+  padding: 125px 10%;
 }
+
 .map {
   width: 100%;
   height: 80vh;
@@ -11,3 +16,15 @@
 
 :host ::ng-deep .mapboxgl-canvas {
   outline: none !important; }
+
+@media (max-width: 540px) {
+  .container-fluid {
+    padding: 80px 10%;
+  }
+}
+
+@media (max-width: 320px) {
+  .container-fluid {
+    padding: 90px 10%;
+  }
+}
