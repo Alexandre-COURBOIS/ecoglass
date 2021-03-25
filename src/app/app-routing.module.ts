@@ -14,6 +14,7 @@ import {CguComponent} from './Pages/cgu/cgu.component';
 import {LegalMentionComponent} from './Pages/legal-mention/legal-mention.component';
 import {ProductPresentationComponent} from './Pages/product-presentation/product-presentation.component';
 import {TeamPageComponent} from './Pages/team-page/team-page.component';
+import {UserPointComponent} from "./Pages/user-point/user-point.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: 'notre-equipe', component: TeamPageComponent},
   {path: 'user-profil', canActivate: [AuthGuardService], component: UserProfilComponent},
+  {path: 'user-point', canActivate: [AuthGuardService], component: UserPointComponent},
   {path: 'map', canActivate: [AuthGuardService], component: MapComponent},
   {path: '404NotFound', component: NotFound404Component},
   {path: '', redirectTo: 'user-profil', pathMatch: 'full'},
