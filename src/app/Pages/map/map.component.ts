@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import * as mapboxgl from 'mapbox-gl';
 // @ts-ignore
@@ -14,6 +14,7 @@ import * as turf from '@turf/turf';
 export class MapComponent implements OnInit {
   // @ts-ignore
   private map: mapboxgl.Map;
+  @ViewChild('mapElement') mapElement!: ElementRef;
   private direction: MapBoxDirection;
 
   constructor(private containerService: ContainersService) {
@@ -36,7 +37,7 @@ export class MapComponent implements OnInit {
       });
 
       this.map = new mapboxgl.Map({
-        container: 'map',
+        container: this.mapElement.nativeElement,
         style: 'mapbox://styles/mapbox/streets-v11',
         zoom: 5,
         center: [2.209667, 46.232193]
