@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
             // @ts-ignore
             this.cookieService.set('_postalCode', user.postalCode);
 
-            this.router.navigate(['/user-profil']).then(logged => {
+            this.router.navigate(['']).then(logged => {
               // @ts-ignore
 
               let logValue = this.encryptService.encode("true");
