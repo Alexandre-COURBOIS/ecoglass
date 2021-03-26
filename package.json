@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~11.2.4",
     "@angular/router": "~11.2.4",
     "@mapbox/mapbox-gl-directions": "^4.1.0",
+    "@mapbox/mapbox-gl-geocoder": "^4.7.0",
     "@ng-bootstrap/ng-bootstrap": "^9.0.2",
     "@turf/distance": "^6.3.0",
     "@turf/turf": "^6.3.0",

@@ -5,6 +5,8 @@ import * as mapboxgl from 'mapbox-gl';
 import * as MapBoxDirection from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import {ContainersService} from "../../Services/containers.service";
 import * as turf from '@turf/turf';
+// @ts-ignore
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 @Component({
   selector: 'app-map',
@@ -45,12 +47,15 @@ export class MapComponent implements OnInit {
       this.map.addControl(this.direction);
       var geojson = {
         type: 'FeatureCollection',
-        features: [{}],
+        features: [],
         properties: {}
       }
+
       for (let i = 0; i < Object.keys(value).length; i++) {
+        // @ts-ignore
         geojson.features.push({
           geometry: {
+            // @ts-ignore
             type: 'Point',
             // @ts-ignore
             coordinates: [value[i].longitude, value[i].latitude]
@@ -59,12 +64,159 @@ export class MapComponent implements OnInit {
             // @ts-ignore
             street: value[i].street,
             // @ts-ignore
-            postalCodeAndCity: value[i].postalCode + ' ' + value[i].city
+            postalCodeAndCity: value[i].postalCode + ' ' + value[i].city,
+            // @ts-ignore
+            id: i
           }
-        })
+        });
+
+      }
+      navigator.geolocation.getCurrentPosition(position => {
+
+        sessionStorage.setItem('userLng', String(position.coords.longitude));
+        sessionStorage.setItem('userLat', String(position.coords.latitude));
+      });
+
+      geojson.features.forEach(function (container) {
+
+        // @ts-ignore
+        var distance = turf.distance(container.geometry.coordinates, [Number(sessionStorage.getItem('userLng')), Number(sessionStorage.getItem('userLat'))], {units: "kilometers"});
+
+        // @ts-ignore
+        Object.defineProperty(container.properties, 'distance', {
+          // @ts-ignore
+          value: distance.toFixed([2])
+
+        });
+      });
+
+      geojson.features.sort(function (a, b) {
+        // @ts-ignore
+        if (a.properties.distance > b.properties.distance) {
+          return 1;
+        }
+        // @ts-ignore
+        if (a.properties.distance < b.properties.distance) {
+          return -1;
+        }
+        return 0; // a must be equal to b
+      });
+
+
+      var listings = document.getElementById('listings');
+      // @ts-ignore
+      while (listings.firstChild) {
+        // @ts-ignore
+        listings.removeChild(listings.firstChild);
       }
 
-       this.direction = new MapBoxDirection({
+
+
+      const buildListing = (data: { features: any[]; }) => {
+
+        var dataSliced = data.features.slice(0, 10);
+        console.log(dataSliced)
+        dataSliced.forEach((container, i) => {
+
+          var prop = container.properties;
+
+          var listings = document.getElementById('listings');
+          // @ts-ignore
+          var listing = listings.appendChild(document.createElement('div'));
+          listing.id = 'listing-' + prop.id;
+          listing.className = 'item';
+
+          var link = listing.appendChild(document.createElement('a'));
+
+          link.className = 'title';
+          link.id = 'link-' + prop.id;
+          link.innerHTML = prop.street;
+
+          var details = listing.appendChild(document.createElement('div'));
+
+          if (prop.distance) {
+            var roundedDistance = Math.round(prop.distance * 100) / 100;
+            details.innerHTML +=
+              '<p><strong>à' + roundedDistance + ' km de chez vous</strong></p>';
+          }
+
+          const flyToContainer = (currentFeature: { geometry: { coordinates: any; }; }) => {
+            this.map.flyTo({
+              center: currentFeature.geometry.coordinates,
+              zoom: 15
+            });
+          }
+
+
+          link.addEventListener('click', (e) => {
+            var clickedListing = data.features[i];
+            flyToContainer(clickedListing);
+
+            var popup = new mapboxgl.Popup();
+            const getThisDirection = () => {
+              return this.direction;
+            }
+            popup.on('open', function () {
+              if (navigator.geolocation) {
+                // @ts-ignore
+                var coordinates = clickedListing.geometry.coordinates.slice();
+                var street = clickedListing.properties.street;
+                var postalCodeAndCity = clickedListing.properties.postalCodeAndCity;
+
+
+
+                var distance = turf.distance([coordinates[0], coordinates[1]], [Number(sessionStorage.getItem('userLng')), Number(sessionStorage.getItem('userLat'))], {units: "kilometers"});
+
+                popup.setLngLat(coordinates)
+                  .setHTML(
+                    // @ts-ignore
+                    '<div class="card" style="border:none !important;"><p class="h5 font-weight-bold text-center">' + street + '<br>' + postalCodeAndCity + '</p><p class="ml-1">' + 'à ' + distance.toFixed([2]) + ' km de chez vous</p>' +
+                    '<button class="btn btn-success" id="btn">M\'y emmener <i class="fas fa-map-marker-alt"></i></button></div>'
+                  )
+
+                // @ts-ignore
+                document.getElementById("btn").addEventListener("click", function () {
+                  var directions = getThisDirection();
+                  directions.setOrigin(Number(sessionStorage.getItem('userLng')) + ',' + Number(sessionStorage.getItem('userLat')))
+                  directions.setDestination(coordinates)
+                });
+              } else {
+                alert("Votre navigateur ne supporte pas la géolocalisation")
+              }
+
+            });
+
+            popup.addTo(this.map);
+
+
+
+            var activeItem = document.getElementsByClassName('active');
+            if (activeItem[0]) {
+              activeItem[0].classList.remove('active');
+            }
+            // @ts-ignore
+            this.parentNode.classList.add('active');
+          });
+
+        });
+      }
+
+      buildListing(geojson);
+
+
+
+      var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+        marker: false,
+        countries: 'fr'
+      });
+
+      // @ts-ignore
+      document.getElementById('geocoder').appendChild(geocoder.onAdd(this.map));
+
+
+      this.direction = new MapBoxDirection({
         accessToken: environment.mapBoxKey,
         unit: 'metric',
         profile: 'mapbox/cycling',
@@ -188,55 +340,28 @@ export class MapComponent implements OnInit {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
               }
 
-              const getUserLoc = () => new Promise((resolve,reject)=> {
-                if (navigator.geolocation) {
-                  navigator.geolocation.getCurrentPosition(
-                    position => {
-                      resolve(position);
-                    },
-                    error => {
-                      alert("Veuillez accepter l'utilisation de la géocalisation pour avoir accès à cette fonctionnalité")
-                    },
-                    {
-                      enableHighAccuracy: true,
-                      timeout: 10000,
-                      maximumAge: 1000
-                    }
-                  );
-                }
-              });
-              console.log(navigator.geolocation);
               var popup = new mapboxgl.Popup();
 
-              popup.on('open', function(){
+              popup.on('open', function () {
                 if (navigator.geolocation) {
-                  getUserLoc().then(position => {
-                    // @ts-ignore
-                    let userLng = position.coords.longitude;
-                    // @ts-ignore
-                    let userLat = position.coords.latitude;
 
-                    var distance = turf.distance([coordinates[0], coordinates[1]], [userLng, userLat], {units: "kilometers"});
+                  var distance = turf.distance([coordinates[0], coordinates[1]], [Number(sessionStorage.getItem('userLng')), Number(sessionStorage.getItem('userLat'))], {units: "kilometers"});
 
-                    popup.setLngLat(coordinates)
-                      .setHTML(
-                        // @ts-ignore
-                        '<div class="card" style="border:none !important;"><p class="h5 font-weight-bold text-center">' + street + '<br>' + postalCodeAndCity + '</p><p class="ml-1">' + 'à ' + distance.toFixed([2]) + ' km de chez vous</p>' +
-                        '<button class="btn btn-success" id="btn">M\'y emmener <i class="fas fa-map-marker-alt"></i></button></div>'
-                      )
+                  popup.setLngLat(coordinates)
+                    .setHTML(
+                      // @ts-ignore
+                      '<div class="card" style="border:none !important;"><p class="h5 font-weight-bold text-center">' + street + '<br>' + postalCodeAndCity + '</p><p class="ml-1">' + 'à ' + distance.toFixed([2]) + ' km de chez vous</p>' +
+                      '<button class="btn btn-success" id="btn">M\'y emmener <i class="fas fa-map-marker-alt"></i></button></div>'
+                    )
 
-                    // @ts-ignore
-                    document.getElementById("btn").addEventListener("click", function(){
-                      var directions = getThisDirection();
-                      navigator.geolocation.getCurrentPosition(position => {
-                        directions.setOrigin(position.coords.longitude + ',' + position.coords.latitude)
-                      });
-                      directions.setDestination(coordinates)
-                    });
-
+                  // @ts-ignore
+                  document.getElementById("btn").addEventListener("click", function () {
+                    var directions = getThisDirection();
+                    directions.setOrigin(Number(sessionStorage.getItem('userLng')) + ',' + Number(sessionStorage.getItem('userLat')))
+                    directions.setDestination(coordinates)
                   });
                 } else {
-                  alert("Veuillez accepter l'utilisation de la géocalisation pour avoir accès à cette fonctionnalité")
+                  alert("Votre navigateur ne supporte pas la géolocalisation")
                 }
 
               });
