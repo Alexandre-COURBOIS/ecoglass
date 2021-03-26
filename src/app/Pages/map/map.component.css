@@ -1,10 +1,10 @@
 body {
   background-size: cover;
   background: #FAFAFA url("src/assets/image/map/backgroundMap.jpg") no-repeat;
+  height: 1100px;
 }
 
 .container-fluid {
-  height: 100%;
   padding: 125px 10%;
 }
 
@@ -42,6 +42,12 @@ body {
 :host ::ng-deep .mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
   border-radius: 10px !important;
   border: 1px solid #dee2e6!important;
+}
+
+@media (max-width: 1370px) {
+  body {
+    height: 2000px;
+  }
 }
 
 @media (max-width: 540px) {

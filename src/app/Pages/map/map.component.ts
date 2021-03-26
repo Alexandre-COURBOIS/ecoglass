@@ -115,7 +115,6 @@ export class MapComponent implements OnInit {
       const buildListing = (data: { features: any[]; }) => {
 
         var dataSliced = data.features.slice(0, 5);
-        console.log(dataSliced)
         dataSliced.forEach((container, i) => {
 
           var prop = container.properties;
@@ -137,7 +136,7 @@ export class MapComponent implements OnInit {
           if (prop.distance) {
             var roundedDistance = Math.round(prop.distance * 100) / 100;
             details.innerHTML +=
-              '<p><span class="text-muted">à' + roundedDistance + ' km de chez vous</span></p>';
+              '<p><span class="text-muted">à ' + roundedDistance + ' km de chez vous</span></p>';
           }
 
           const flyToContainer = (currentFeature: { geometry: { coordinates: any; }; }) => {
@@ -163,7 +162,12 @@ export class MapComponent implements OnInit {
                 var street = clickedListing.properties.street;
                 var postalCodeAndCity = clickedListing.properties.postalCodeAndCity;
 
-
+                if(postalCodeAndCity.includes('null')) {
+                  postalCodeAndCity = " ";
+                }
+                if(street.includes('null')) {
+                  street = " ";
+                }
 
                 var distance = turf.distance([coordinates[0], coordinates[1]], [Number(sessionStorage.getItem('userLng')), Number(sessionStorage.getItem('userLat'))], {units: "kilometers"});
 
@@ -187,15 +191,6 @@ export class MapComponent implements OnInit {
             });
 
             popup.addTo(this.map);
-
-
-
-            var activeItem = document.getElementsByClassName('active');
-            if (activeItem[0]) {
-              activeItem[0].classList.remove('active');
-            }
-            // @ts-ignore
-            this.parentNode.classList.add('active');
           });
 
         });
@@ -334,6 +329,13 @@ export class MapComponent implements OnInit {
               var postalCodeAndCity = e.features[0].properties.postalCodeAndCity;
               // @ts-ignore
               var street = e.features[0].properties.street;
+
+              if(postalCodeAndCity.includes('null')) {
+                postalCodeAndCity = " ";
+              }
+              if(street.includes('null')) {
+                street = " ";
+              }
 
 
               while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
