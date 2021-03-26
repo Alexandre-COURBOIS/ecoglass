@@ -114,7 +114,7 @@ export class MapComponent implements OnInit {
 
       const buildListing = (data: { features: any[]; }) => {
 
-        var dataSliced = data.features.slice(0, 10);
+        var dataSliced = data.features.slice(0, 5);
         console.log(dataSliced)
         dataSliced.forEach((container, i) => {
 
@@ -122,14 +122,14 @@ export class MapComponent implements OnInit {
 
           var listings = document.getElementById('listings');
           // @ts-ignore
-          var listing = listings.appendChild(document.createElement('div'));
+          var listing = listings.appendChild(document.createElement('li'));
           listing.id = 'listing-' + prop.id;
-          listing.className = 'item';
+          listing.className = 'list-group-item';
 
           var link = listing.appendChild(document.createElement('a'));
 
-          link.className = 'title';
-          link.id = 'link-' + prop.id;
+          link.className = 'card-link';
+          link.id = 'linkContainer'
           link.innerHTML = prop.street;
 
           var details = listing.appendChild(document.createElement('div'));
@@ -137,7 +137,7 @@ export class MapComponent implements OnInit {
           if (prop.distance) {
             var roundedDistance = Math.round(prop.distance * 100) / 100;
             details.innerHTML +=
-              '<p><strong>à' + roundedDistance + ' km de chez vous</strong></p>';
+              '<p><span class="text-muted">à' + roundedDistance + ' km de chez vous</span></p>';
           }
 
           const flyToContainer = (currentFeature: { geometry: { coordinates: any; }; }) => {
