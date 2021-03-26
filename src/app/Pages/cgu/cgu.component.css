@@ -1,0 +1,13 @@
+.cguContainer {
+  padding-top: 125px;
+  max-width: 97%;
+  margin: 0 auto;
+}
+
+.cguMainTitle {
+  text-align:center;
+}
+
+.cguTitle, .cguSubTitle {
+  margin: 25px 0;
+}

@@ -1,0 +1,128 @@
+@font-face {
+ font-family: "Ryman";
+  src: url("src/assets/font/RymanEco-Regular.otf") format("otf");
+}
+
+.global {
+  padding: 150px 0;
+  opacity: .9 !important;
+}
+
+.backgroundgroup {
+  display: flex;
+  justify-content: space-around;
+}
+
+.background {
+  width: 70%;
+  top: 50px;
+  position: fixed;
+  z-index: -1;
+}
+
+.container-product {
+  background-color: rgba(255,255,255,0.8);
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  border: white 1px solid;
+  border-radius: 25px;
+  box-shadow: 0 0 25px 5px rgb(173 156 156);
+  padding-bottom: 75px;
+}
+
+.div-img-title {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.titre-image {
+  width: 100%;
+}
+
+.product-text {
+  text-align: center;
+  margin-top: 50px;
+  line-height: 35px;
+}
+
+.section2 {
+  display: grid;
+  width: 80%;
+  margin: 100px auto 0 auto;
+}
+
+.section2 img {
+  width: 300px;
+  grid-column: 1;
+  margin: 0 auto;
+}
+
+.section2 h3, .para1-product {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.para1-product {
+  margin-top: 95px;
+  line-height: 35px;
+}
+
+.para2-product {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: center;
+  margin-top: 20px;
+  line-height: 35px;
+  color: red;
+}
+
+.section3 {
+  margin-top: 100px;
+}
+
+.product-subtitle {
+  text-align: center;
+  margin-bottom: 50px;
+  font-family: "Ryman", sans-serif;
+}
+
+.points {
+  font-size: 1.2em;
+  margin-top: 20px;
+  text-align: center;
+}
+
+i {
+  color: #218838;
+}
+
+.warning {
+  color: red;
+  font-family: "Ryman", sans-serif;
+  text-align: center;
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 1080px) {
+  .div-img-title {
+    width: 50%;
+  }
+  .section2 {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  .section3 {
+    margin-top: 35px;
+  }
+  .product-subtitle {
+    margin: 20px 0;
+  }
+  .para1-product {
+    margin-top: 0;
+  }
+}
+

@@ -1,0 +1,30 @@
+footer {
+  /*    background: url("src/assets/image/footer/pexels-hilary-halliwell-38012.jpg") no-repeat center;*/
+  background-color: #FAFAFA;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.row {
+  margin: 0 0 0 0 !important;
+}
+
+a{
+  margin: 0 5%;
+  color: black;
+  text-decoration: underline;
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+
+.copyright {
+  margin: 1% 0;
+  font-size: 12px;
+}
+
+
+@media (max-width: 768px) {
+  .col-md-3 {
+    border: none;
+  }
+}

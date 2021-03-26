@@ -1,0 +1,25 @@
+.container-fluid {
+  padding-top: 165px;
+}
+
+body {
+  /* The image used */
+  background-image: url("src/assets/image/404/undraw_Container_ship_ok1c.svg");
+
+  /* Full height */
+  height: 100% !important;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #E6E6E6;
+}
+
+
+.lostTxt {
+  margin-top: 20%;
+  color: white;
+  font-weight: 600;
+  font-size: 30px;
+}

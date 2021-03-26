@@ -1,0 +1,89 @@
+<div class="backGround">
+  <div style="position: relative; top: 500px">
+    <ngx-ui-loader [hasProgressBar]="false" [loaderId]="'loader-01'"></ngx-ui-loader>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 loginContainer">
+        <div class="card">
+          <img class="card-img-top" src="assets/image/undraw_Login_re_4vu2.svg" alt="Card image cap">
+          <div class="card-body text-center">
+            <h5 class="card-title title1">Plus que quelques cliques pour effectuer</h5>
+            <h3 class="card-title title2">un beau geste pour la Planête !</h3>
+          </div>
+          <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <input placeholder="Email" type="text" name="email" id="email" class="form-control"
+                     formControlName="email">
+            </div>
+            <div class="container-error">
+              <div class="error" *ngIf="submitted && f.email.errors && f.email.errors.required">Merci de renseigner
+                votre
+                email.
+              </div>
+              <div class="error" *ngIf="authForm.get('email')?.value && f.email.errors && f.email.errors.pattern">Merci
+                de renseigner un email valide.
+              </div>
+            </div>
+            <div class="form-group">
+              <input placeholder="Mot de passe" type="password" name="password" id="password" class="form-control"
+                     formControlName="password">
+            </div>
+            <div class="container-error">
+              <div class="error" *ngIf="submitted && f.password.errors && f.password.errors.required">Merci de
+                renseigner
+                votre mot de passe.
+              </div>
+              <div class="error"
+                   *ngIf="authForm.get('password')?.value && f.password.errors && f.password.errors.pattern">
+                Doit contenir au moins, 8 caractères, une lettre majuscule, un chiffre et un caractère spécial.
+              </div>
+            </div>
+            <div class="text-center">
+              <input type="submit" [disabled]="submitted" class="btn btn-success" value="Contribuer !">
+            </div>
+          </form>
+          <div class="text-center forgotPassword">
+            <a (click)="open(content)">Mot de passe oublié ?</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div style="background: green; color: white" class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Mot de passe oublié ?</h4>
+    <button style="color: white" type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div style="background: #FAFAFA;" class="modal-body">
+    <form [formGroup]="resetPasswordForm" (ngSubmit)="submitResetPassWordForm()">
+      <div class="form-group">
+        <div class="input-group">
+          <input placeholder="Votre email"
+                 style="width: 100%; border: none; border-bottom: 1px solid rgba(0,0,0,0.3); background: #FAFAFA"
+                 type="text" formControlName="email">
+        </div>
+      </div>
+      <div class="container-error">
+        <div class="error" *ngIf="submitted && fp.email.errors && fp.email.errors.required">Merci de renseigner
+          votre
+          email.
+        </div>
+        <div class="error" *ngIf="resetPasswordForm.get('email')?.value && fp.email.errors && fp.email.errors.pattern">
+          Merci
+          de renseigner un email valide.
+        </div>
+      </div>
+      <div class="text-right">
+        <input type="submit" class="btn btn-success" [disabled]="resetPasswordForm.invalid" (click)="modal.close()" value="Envoyer !">
+      </div>
+    </form>
+  </div>
+
+</ng-template>

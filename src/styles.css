@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Lato Light", sans-serif;
+}
+
+@font-face {
+  font-family: Ryman;
+  src: local('Ryman'), url("./assets/font/RymanEco-Regular.otf") format("truetype");
+}
+
+body,html {
+  background-color: #FAFAFA;
+  height: 100%;
+  width: 100%;
+}
+
+.container-error {
+  height: 15px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+}

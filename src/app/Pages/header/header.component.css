@@ -1,0 +1,58 @@
+header {
+  position: fixed;
+  z-index: 2;
+}
+
+img {
+  width: 10%;
+  height: 8%;
+}
+
+.navbar-brand {
+  width: 35%;
+  height: 100%;
+}
+
+#navbarText {
+  text-align: center;
+}
+
+a {
+  color: #6C757D !important;
+  font-size: 12px !important;
+  font-weight: bold;
+}
+li a {
+  font-size: 20px !important;
+}
+li a:hover {
+  color: #373737 !important;
+}
+
+.navbar-text {
+  margin-right: 5%;
+}
+
+i {
+  color: #28A745;
+  font-size: 25px;
+  background-color: transparent;
+}
+
+ul li{
+  padding: 0 5% 0 5%;
+}
+
+header {
+  background-color: rgba(255,255,255,1);
+}
+
+#dropdownMenuButton {
+  border: none;
+  background: rgba(255,255,255,0.8) !important;
+}
+
+.dropdown-item {
+  cursor: pointer;
+}
+

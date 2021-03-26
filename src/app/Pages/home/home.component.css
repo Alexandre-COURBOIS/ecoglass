@@ -1,0 +1,267 @@
+.containerTop {
+  width: 100%;
+  background-size: cover;
+  background: #FAFAFA url("src/assets/image/home/background_green_4.png") no-repeat;
+}
+
+.containerTop2 {
+  padding-top: 350px;
+}
+
+h1{
+  color: black;
+  font-weight: bold;
+  font-size: 75px;
+  text-transform: uppercase;
+}
+
+.card-text, .p1 {
+  font-weight: bolder;
+  font-size: 45px;
+  margin-bottom: 0;
+  color: black;
+}
+
+.btnJoin {
+  margin: 4% 0;
+  background-color: #6CA421;
+  border-color: #6CA421;
+  font-size: 25px;
+  width: 50%;
+}
+
+.btnJoin:hover {
+  background-color: #356305;
+  border-color: #356305;
+}
+
+.colright {
+  margin-top: 5%;
+}
+
+/*2ND SECCTION*/
+
+.containerSelect {
+  padding: 150px;
+}
+
+.select {
+  font-weight: bolder;
+  padding: 5%;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 25px;
+  -webkit-box-shadow: 0px 0px 10px 2px rgba(173, 156, 156, 1);
+  -moz-box-shadow: 0px 0px 10px 2px rgba(173, 156, 156, 1);
+  box-shadow: 0px 0px 10px 2px rgba(173, 156, 156, 1);
+}
+
+.select:hover {
+  transition: .2s ease-in-out;
+  -webkit-box-shadow: 0px 0px 15px 5px rgba(173, 156, 156, 1);
+  -moz-box-shadow: 0px 0px 15px 5px rgba(173, 156, 156, 1);
+  box-shadow: 0px 0px 15px 5px rgba(173, 156, 156, 1);
+}
+
+.fa-play  {
+  color: #356305;
+}
+
+.colSelect{
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.container-image {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background: url("src/assets/image/home/imageSelect/register.png") no-repeat center;
+  background-size: contain;
+}
+
+.map {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background: url("src/assets/image/home/imageSelect/map.png") no-repeat;
+  background-size: contain;
+}
+
+.register {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background: url("src/assets/image/home/imageSelect/register.png") no-repeat center;
+  background-size: contain;
+}
+
+.showProfil {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background: url("src/assets/image/home/imageSelect/profil.png") no-repeat;
+  background-size: cover;
+}
+
+.showTeam {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background: url("src/assets/image/home/imageSelect/team.png") no-repeat;
+  background-size: cover;
+}
+
+.showAdvantage {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background: url("src/assets/image/home/imageSelect/recompenses.png") no-repeat;
+  background-size: cover;
+}
+
+
+/*3ND SECTION*/
+
+.rowCards {
+  margin: 5% 0;
+}
+
+.card {
+  width: 60% !important;
+  margin: 10% 20%;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 0px 25px 5px rgba(173, 156, 156, 1);
+  -moz-box-shadow: 0px 0px 25px 5px rgba(173, 156, 156, 1);
+  box-shadow: 0px 0px 25px 5px rgba(173, 156, 156, 1);
+}
+
+.card-text {
+  font-size: 25px;
+  margin: 5% 0;
+}
+
+/*4EME SECTION*/
+
+.title {
+  padding: 5% 0;
+  color: white;
+  font-weight: bold;
+}
+.background {
+  width: 100%;
+  background: #FAFAFA url("src/assets/image/home/Section4/bgSection4.png") no-repeat;
+  background-size: cover;
+  padding: 2% 0;
+}
+
+.forEveryoneContainer{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background: rgb(177,227,4);
+  background: linear-gradient(90deg, rgba(177,227,4,1) 0%, rgba(107,162,34,1) 33%, rgba(66,117,5,1) 66%);
+  border-radius: 10px;
+}
+
+.forEveryone {
+  width: 100%;
+  padding-bottom: 10%;
+}
+
+.forEveryonep {
+  font-size: 20px;
+  font-weight: bolder;
+  color: white;
+}
+
+.text {
+  color: white;
+}
+
+/* Responsive */
+
+
+
+@media (max-width: 361px) {
+  .rowCards {
+    margin-top: 60%;
+    padding-bottom: 50%;
+  }
+}
+
+@media (max-width: 375px) {
+  .rowCards {
+    padding: 35% 0;
+  }
+}
+
+@media (max-width: 415px) {
+  .rowCards {
+    padding-bottom: 30%;
+  }
+}
+
+@media (max-width: 420px) {
+  .container-xl {
+    padding-top: 150px;
+  }
+}
+
+@media (max-width: 465px) {
+  h1 {
+    font-size: 55px;
+  }
+}
+
+@media (max-width: 540px) {
+  .container-xl {
+    padding-top: 150px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .rowCards {
+    padding : 5% 0 10% 0;
+  }
+
+  .card {
+    width: 100% !important;
+    margin: 2% 2%;
+  }
+}
+
+@media (max-width: 1158px) {
+  .containerSelect {
+    display: none;
+  }
+}
+
+@media (max-width: 1366px) {
+  .rowCards {
+    padding : 0 0 15% 0;
+  }
+
+  .card {
+    width: 100% !important;
+    margin: 2% 2%;
+  }
+}
+
+
+
+
+
+
+
