@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="text-center">
-        <p>Dites-nous tout <i class="fab fa-telegram-plane"></i></p>
+        <p class="tellUs">Dites-nous tout <i class="fab fa-telegram-plane"></i></p>
         <div class="form-group">
           <input placeholder="Prenom" type="text" name="prenom" id="prenom" class="form-control inputField"
                  formControlName="prenom">
@@ -23,7 +23,13 @@
         <div class="form-group">
           <textarea name="message" id="message" placeholder="Votre message" formControlName="message" cols="20" rows="5"></textarea>
         </div>
-        <input class="btn btn-success" type="submit" [disabled]="submitted" value="Envoyer">
+        <div class="captchaContainer">
+          <re-captcha class="recaptcha" size="normal"
+          (resolved)="resolved($event)"
+          siteKey="6LcEnI4aAAAAABLcj9-snm-i2L0ac76JipIkXnag"
+          ></re-captcha></div>
+        <input *ngIf="recaptchaVerif == true" class="btn btn-success" type="submit" value="Envoyer">
+        <span *ngIf="recaptchaVerif == false"><strong> Veuillez vérifier le Captcha pour envoyer votre message.</strong></span>
       </form>
     </div>
   </div>

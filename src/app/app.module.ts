@@ -27,7 +27,7 @@ import { LegalMentionComponent } from './Pages/legal-mention/legal-mention.compo
 import { ProductPresentationComponent } from './Pages/product-presentation/product-presentation.component';
 import { TeamPageComponent } from './Pages/team-page/team-page.component';
 import { UserPointComponent } from './Pages/user-point/user-point.component';
-
+import {RecaptchaFormsModule, RecaptchaModule} from "ng-recaptcha";
 
 
 @NgModule({
@@ -58,6 +58,8 @@ import { UserPointComponent } from './Pages/user-point/user-point.component';
     HttpClientModule,
     NgxUiLoaderModule,
     NgbModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   providers: [
     {
