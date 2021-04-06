@@ -23,6 +23,7 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.containerService.getContainer().subscribe(value => {
       // @ts-ignore
       mapboxgl.accessToken = environment.mapBoxKey;
@@ -386,6 +387,5 @@ export class MapComponent implements OnInit {
       console.log(error);
     })
   };
-
 
 }
