@@ -170,8 +170,6 @@ export class UserProfilComponent implements OnInit {
         this.cookieService.set('_postalCode', postalCode);
         this.cookieService.set('_city', city);
         this.ngxService.stopLoader('loader-01');
-
-        console.log(value);
       }, error => {
 
         this.ngxService.stopLoader('loader-01');

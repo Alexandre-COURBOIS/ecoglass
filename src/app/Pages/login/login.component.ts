@@ -113,7 +113,6 @@ export class LoginComponent implements OnInit {
 
             });
           }, error => {
-            console.log(error);
             this.submitted = false;
           });
 
@@ -125,7 +124,6 @@ export class LoginComponent implements OnInit {
             this.toastr.error('Email ou mot de passe incorrect');
             this.submitted = false;
           }
-          console.log(error);
           this.submitted = false;
           this.ngxService.stopLoader('loader-01');
         });
