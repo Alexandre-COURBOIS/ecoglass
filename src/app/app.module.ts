@@ -37,6 +37,7 @@ import {RecaptchaFormsModule, RecaptchaModule} from "ng-recaptcha";
     LoginComponent,
     MapComponent,
     RegisterComponent,
+    RegisterComponent,
     UserProfilComponent,
     NotFound404Component,
     HeaderComponent,
